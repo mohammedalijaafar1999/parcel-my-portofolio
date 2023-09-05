@@ -1,0 +1,24 @@
+{
+  "name": "vite-my-portofolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "parcel ./src/pages/*.html",
+    "build": "parcel build ./src/pages/*.html --out-dir dist"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0"
+  },
+  "dependencies": {
+    "@barba/core": "^2.9.7",
+    "feather-icons": "^4.29.1",
+    "gsap": "^3.12.2"
+  },
+  "staticFiles": {
+    "staticPath": [
+      "./public"
+    ]
+  }
+}
