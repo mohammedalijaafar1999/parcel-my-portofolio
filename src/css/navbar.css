@@ -3,18 +3,17 @@
   --menu-focus: #d0e0a2;
   --color-link: #ff5353;
   --marquee-bg: #4b4b4b;
-  --marquee-text: #ffb74b;
+  --marquee-text: #ff9432;
 }
 /* ------------------------- Menu Burger Button ----------------------------- */
 #menu-burger {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 2rem;
+  margin: 5rem;
   font-size: 3rem;
   padding: 0;
   display: inline-block;
-  cursor: pointer;
 }
 
 .bar1,
@@ -43,7 +42,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.274);
   overflow: hidden;
   display: flex;
@@ -68,7 +67,7 @@
 }
 
 .menu__item {
-  cursor: default;
+  /* cursor: default; */
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -82,7 +81,7 @@
 .menu__item-link {
   display: block;
   position: relative;
-  cursor: pointer;
+  /* cursor: pointer; */
   text-decoration: none;
 }
 
