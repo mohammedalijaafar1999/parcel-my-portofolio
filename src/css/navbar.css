@@ -39,7 +39,7 @@
 }
 
 .menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   backdrop-filter: blur(15px);
