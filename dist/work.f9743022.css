@@ -1,0 +1,38 @@
+.works-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  padding: 3rem 5%;
+}
+
+.work-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(33.33% - 10px);
+}
+
+.work-container img {
+  border-color: black;
+  border-width: 0.5rem;
+  border-style: solid;
+  transition: 0.3s all;
+}
+
+.work-container img:hover {
+  border-color: black;
+  border-width: 0.5rem;
+  border-style: solid;
+  transform: scale(1.1);
+}
+
+.work-container img {
+  border-color: black;
+  border-width: 0.5rem;
+  border-style: solid;
+  transition: 0.3s all;
+}
+
+
+/*# sourceMappingURL=/work.f9743022.css.map */
