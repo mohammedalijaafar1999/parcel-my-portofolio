@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel ./src/pages/*.html",
     "build": "parcel build ./src/pages/*.html --out-dir dist",
-    "deploy": "npm run build && git subtree push --prefix dist origin gh-pages"
+    "deploy": "npm run build && git push origin --delete gh-pages && git subtree push --prefix dist origin gh-pages"
   },
   "devDependencies": {
     "gh-pages": "^6.0.0",
