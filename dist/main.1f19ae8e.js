@@ -137,17 +137,17 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /*!
- * GSAP 3.12.2
- * https://greensock.com
+ * GSAP 3.12.5
+ * https://gsap.com
  *
- * @license Copyright 2008-2023, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2024, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
 /* eslint-disable */
-var _config = {
+var _config = exports._config = {
     autoSleep: 120,
     force3D: "auto",
     nullTargetWarn: 1,
@@ -171,7 +171,7 @@ var _config = {
   _sqrt = Math.sqrt,
   _cos = Math.cos,
   _sin = Math.sin,
-  _isString = function _isString(value) {
+  _isString = exports._isString = function _isString(value) {
     return typeof value === "string";
   },
   _isFunction = function _isFunction(value) {
@@ -180,7 +180,7 @@ var _config = {
   _isNumber = function _isNumber(value) {
     return typeof value === "number";
   },
-  _isUndefined = function _isUndefined(value) {
+  _isUndefined = exports._isUndefined = function _isUndefined(value) {
     return typeof value === "undefined";
   },
   _isObject = function _isObject(value) {
@@ -200,12 +200,12 @@ var _config = {
   _isArray = Array.isArray,
   _strictNumExp = /(?:-?\.?\d|\.)+/gi,
   //only numbers (including negatives and decimals) but NOT relative values.
-  _numExp = /[-+=.]*\d+[.e\-+]*\d*[e\-+]*\d*/g,
+  _numExp = exports._numExp = /[-+=.]*\d+[.e\-+]*\d*[e\-+]*\d*/g,
   //finds any numbers, including ones that start with += or -=, negative numbers, and ones in scientific notation like 1e-8.
-  _numWithUnitExp = /[-+=.]*\d+[.e-]*\d*[a-z%]*/g,
+  _numWithUnitExp = exports._numWithUnitExp = /[-+=.]*\d+[.e-]*\d*[a-z%]*/g,
   _complexStringNumExp = /[-+=.]*\d+\.?\d*(?:e-|e\+)?\d*/gi,
   //duplicate so that while we're looping through matches from exec(), it doesn't contaminate the lastIndex of _numExp which we use to search for colors too.
-  _relExp = /[+-]=-?[.\d]+/,
+  _relExp = exports._relExp = /[+-]=-?[.\d]+/,
   _delimitedValueExp = /[^,'"\[\]\s]+/gi,
   // previously /[#\-+.]*\b[a-z\d\-=+%.]+/gi but didn't catch special characters.
   _unitExp = /^[+\-=e\s\d]*\d+[.\d]*([a-z]*|%)\s*$/i,
@@ -219,7 +219,7 @@ var _config = {
   _install = function _install(scope) {
     return (_installScope = _merge(scope, _globals)) && gsap;
   },
-  _missingPlugin = function _missingPlugin(property, value) {
+  _missingPlugin = exports._missingPlugin = function _missingPlugin(property, value) {
     return console.warn("Invalid property", property, "set to", value, "Missing plugin? gsap.registerPlugin()");
   },
   _warn = function _warn(message, suppress) {
@@ -247,7 +247,7 @@ var _config = {
   _lazyTweens = [],
   _lazyLookup = {},
   _lastRenderedFrame,
-  _plugins = {},
+  _plugins = exports._plugins = {},
   _effects = {},
   _nextGCFrame = 30,
   _harnessPlugins = [],
@@ -269,24 +269,24 @@ var _config = {
     }
     return targets;
   },
-  _getCache = function _getCache(target) {
+  _getCache = exports._getCache = function _getCache(target) {
     return target._gsap || _harness(toArray(target))[0]._gsap;
   },
-  _getProperty = function _getProperty(target, property, v) {
+  _getProperty = exports._getProperty = function _getProperty(target, property, v) {
     return (v = target[property]) && _isFunction(v) ? target[property]() : _isUndefined(v) && target.getAttribute && target.getAttribute(property) || v;
   },
-  _forEachName = function _forEachName(names, func) {
+  _forEachName = exports._forEachName = function _forEachName(names, func) {
     return (names = names.split(",")).forEach(func) || names;
   },
   //split a comma-delimited list of names into an array, then run a forEach() function and return the split array (this is just a way to consolidate/shorten some code).
-  _round = function _round(value) {
+  _round = exports._round = function _round(value) {
     return Math.round(value * 100000) / 100000 || 0;
   },
   _roundPrecise = function _roundPrecise(value) {
     return Math.round(value * 10000000) / 10000000 || 0;
   },
   // increased precision mostly for timing values.
-  _parseRelative = function _parseRelative(start, value) {
+  _parseRelative = exports._parseRelative = function _parseRelative(start, value) {
     var operator = value.charAt(0),
       end = parseFloat(value.substr(2));
     start = parseFloat(start);
@@ -323,7 +323,7 @@ var _config = {
   _passThrough = function _passThrough(p) {
     return p;
   },
-  _setDefaults = function _setDefaults(obj, defaults) {
+  _setDefaults = exports._setDefaults = function _setDefaults(obj, defaults) {
     for (var p in defaults) {
       p in obj || (obj[p] = defaults[p]);
     }
@@ -404,7 +404,7 @@ var _config = {
     child.parent = child._dp = parent;
     return child;
   },
-  _removeLinkedListItem = function _removeLinkedListItem(parent, child, firstProp, lastProp) {
+  _removeLinkedListItem = exports._removeLinkedListItem = function _removeLinkedListItem(parent, child, firstProp, lastProp) {
     if (firstProp === void 0) {
       firstProp = "_first";
     }
@@ -478,7 +478,6 @@ var _config = {
       _setEnd(animation);
       parent._dirty || _uncache(parent, animation); //for performance improvement. If the parent's cache is already dirty, it already took care of marking the ancestors as dirty too, so skip the function call here.
     }
-
     return animation;
   },
   /*
@@ -689,7 +688,6 @@ var _config = {
       vars.immediateRender = _isNotFalse(irVars.immediateRender);
       type < 2 ? vars.runBackwards = 1 : vars.startAt = params[varsIndex - 1]; // "from" vars
     }
-
     return new Tween(params[0], vars, params[varsIndex + 1]);
   },
   _conditionalReturn = function _conditionalReturn(value, func) {
@@ -698,11 +696,11 @@ var _config = {
   _clamp = function _clamp(min, max, value) {
     return value < min ? min : value > max ? max : value;
   },
-  getUnit = function getUnit(value, v) {
+  getUnit = exports.getUnit = function getUnit(value, v) {
     return !_isString(value) || !(v = _unitExp.exec(value)) ? "" : v[1];
   },
   // note: protect against padded numbers as strings, like "100.100". That shouldn't return "00" as the unit. If it's numeric, return no unit.
-  clamp = function clamp(min, max, value) {
+  clamp = exports.clamp = function clamp(min, max, value) {
     return _conditionalReturn(value, function (v) {
       return _clamp(min, max, v);
     });
@@ -721,24 +719,24 @@ var _config = {
     }) || accumulator;
   },
   //takes any value and returns an array. If it's a string (and leaveStrings isn't true), it'll use document.querySelectorAll() and convert that to an array. It'll also accept iterables like jQuery objects.
-  toArray = function toArray(value, scope, leaveStrings) {
+  toArray = exports.toArray = function toArray(value, scope, leaveStrings) {
     return _context && !scope && _context.selector ? _context.selector(value) : _isString(value) && !leaveStrings && (_coreInitted || !_wake()) ? _slice.call((scope || _doc).querySelectorAll(value), 0) : _isArray(value) ? _flatten(value, leaveStrings) : _isArrayLike(value) ? _slice.call(value, 0) : value ? [value] : [];
   },
-  selector = function selector(value) {
+  selector = exports.selector = function selector(value) {
     value = toArray(value)[0] || _warn("Invalid scope") || {};
     return function (v) {
       var el = value.current || value.nativeElement || value;
       return toArray(v, el.querySelectorAll ? el : el === value ? _warn("Invalid scope") || _doc.createElement("div") : value);
     };
   },
-  shuffle = function shuffle(a) {
+  shuffle = exports.shuffle = function shuffle(a) {
     return a.sort(function () {
       return .5 - Math.random();
     });
   },
   // alternative that's a bit faster and more reliably diverse but bigger:   for (let j, v, i = a.length; i; j = Math.floor(Math.random() * i), v = a[--i], a[i] = a[j], a[j] = v); return a;
   //for distributing values across an array. Can accept a number, a function or (most commonly) a function which can contain the following properties: {base, amount, from, ease, grid, axis, length, each}. Returns a function that expects the following parameters: index, target, array. Recognizes the following
-  distribute = function distribute(v) {
+  distribute = exports.distribute = function distribute(v) {
     if (_isFunction(v)) {
       return v;
     }
@@ -782,7 +780,7 @@ var _config = {
         if (!wrapAt) {
           max = -_bigNum;
           while (max < (max = a[wrapAt++].getBoundingClientRect().left) && wrapAt < l) {}
-          wrapAt--;
+          wrapAt < l && wrapAt--;
         }
         distances = cache[l] = [];
         originX = ratios ? Math.min(wrapAt, l) * ratioX - .5 : from % wrapAt;
@@ -809,7 +807,7 @@ var _config = {
       return _roundPrecise(distances.b + (ease ? ease(l) : l) * distances.v) + distances.u; //round in order to work around floating point errors
     };
   },
-  _roundModifier = function _roundModifier(v) {
+  _roundModifier = exports._roundModifier = function _roundModifier(v) {
     //pass in 0.1 get a function that'll round to the nearest tenth, or 5 to round to the closest 5, or 0.001 to the closest 1000th, etc.
     var p = Math.pow(10, ((v + "").split(".")[1] || "").length); //to avoid floating point math errors (like 24 * 0.1 == 2.4000000000000004), we chop off at a specific number of decimal places (much faster than toFixed())
 
@@ -818,7 +816,7 @@ var _config = {
       return (n - n % 1) / p + (_isNumber(raw) ? 0 : getUnit(raw)); // n - n % 1 replaces Math.floor() in order to handle negative values properly. For example, Math.floor(-150.00000000000003) is 151!
     };
   },
-  snap = function snap(snapTo, value) {
+  snap = exports.snap = function snap(snapTo, value) {
     var isArray = _isArray(snapTo),
       radius,
       is2D;
@@ -861,12 +859,12 @@ var _config = {
       return is2D || closest === raw || _isNumber(raw) ? closest : closest + getUnit(raw);
     });
   },
-  random = function random(min, max, roundingIncrement, returnFunction) {
+  random = exports.random = function random(min, max, roundingIncrement, returnFunction) {
     return _conditionalReturn(_isArray(min) ? !max : roundingIncrement === true ? !!(roundingIncrement = 0) : !returnFunction, function () {
       return _isArray(min) ? min[~~(Math.random() * min.length)] : (roundingIncrement = roundingIncrement || 1e-5) && (returnFunction = roundingIncrement < 1 ? Math.pow(10, (roundingIncrement + "").length - 2) : 1) && Math.floor(Math.round((min - roundingIncrement / 2 + Math.random() * (max - min + roundingIncrement * .99)) / roundingIncrement) * roundingIncrement * returnFunction) / returnFunction;
     });
   },
-  pipe = function pipe() {
+  pipe = exports.pipe = function pipe() {
     for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
       functions[_key] = arguments[_key];
     }
@@ -876,12 +874,12 @@ var _config = {
       }, value);
     };
   },
-  unitize = function unitize(func, unit) {
+  unitize = exports.unitize = function unitize(func, unit) {
     return function (value) {
       return func(parseFloat(value)) + (unit || getUnit(value));
     };
   },
-  normalize = function normalize(min, max, value) {
+  normalize = exports.normalize = function normalize(min, max, value) {
     return mapRange(min, max, 0, 1, value);
   },
   _wrapArray = function _wrapArray(a, wrapper, value) {
@@ -889,14 +887,14 @@ var _config = {
       return a[~~wrapper(index)];
     });
   },
-  wrap = function wrap(min, max, value) {
+  wrap = exports.wrap = function wrap(min, max, value) {
     // NOTE: wrap() CANNOT be an arrow function! A very odd compiling bug causes problems (unrelated to GSAP).
     var range = max - min;
     return _isArray(min) ? _wrapArray(min, wrap(0, min.length), max) : _conditionalReturn(value, function (value) {
       return (range + (value - min) % range) % range + min;
     });
   },
-  wrapYoyo = function wrapYoyo(min, max, value) {
+  wrapYoyo = exports.wrapYoyo = function wrapYoyo(min, max, value) {
     var range = max - min,
       total = range * 2;
     return _isArray(min) ? _wrapArray(min, wrapYoyo(0, min.length - 1), max) : _conditionalReturn(value, function (value) {
@@ -904,7 +902,7 @@ var _config = {
       return min + (value > range ? total - value : value);
     });
   },
-  _replaceRandom = function _replaceRandom(value) {
+  _replaceRandom = exports._replaceRandom = function _replaceRandom(value) {
     //replaces all occurrences of random(...) in a string with the calculated random value. can be a range like random(-100, 100, 5) or an array like random([0, 100, 500])
     var prev = 0,
       s = "",
@@ -921,14 +919,14 @@ var _config = {
     }
     return s + value.substr(prev, value.length - prev);
   },
-  mapRange = function mapRange(inMin, inMax, outMin, outMax, value) {
+  mapRange = exports.mapRange = function mapRange(inMin, inMax, outMin, outMax, value) {
     var inRange = inMax - inMin,
       outRange = outMax - outMin;
     return _conditionalReturn(value, function (value) {
       return outMin + ((value - inMin) / inRange * outRange || 0);
     });
   },
-  interpolate = function interpolate(start, end, progress, mutate) {
+  interpolate = exports.interpolate = function interpolate(start, end, progress, mutate) {
     var func = isNaN(start + end) ? 0 : function (p) {
       return (1 - p) * start + p * end;
     };
@@ -955,7 +953,6 @@ var _config = {
         for (i = 1; i < l; i++) {
           interpolators.push(interpolate(start[i - 1], start[i])); //build the interpolators up front as a performance optimization so that when the function is called many times, it can just reuse them.
         }
-
         l--;
         func = function func(p) {
           p *= l;
@@ -1022,10 +1019,11 @@ var _config = {
   _quickTween,
   _registerPluginQueue = [],
   _createPlugin = function _createPlugin(config) {
-    if (_windowExists() && config) {
-      // edge case: some build tools may pass in a null/undefined value
-      config = !config.name && config["default"] || config; //UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
+    if (!config) return;
+    config = !config.name && config["default"] || config; // UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
 
+    if (_windowExists() || config.headless) {
+      // edge case: some build tools may pass in a null/undefined value
       var name = config.name,
         isFunc = _isFunction(config),
         Plugin = name && !isFunc && config.init ? function () {
@@ -1063,11 +1061,10 @@ var _config = {
         }
         name = (name === "css" ? "CSS" : name.charAt(0).toUpperCase() + name.substr(1)) + "Plugin"; //for the global name. "motionPath" should become MotionPathPlugin
       }
-
       _addGlobal(name, Plugin);
       config.register && config.register(gsap, Plugin, PropTween);
     } else {
-      config && _registerPluginQueue.push(config);
+      _registerPluginQueue.push(config);
     }
   },
   /*
@@ -1104,7 +1101,7 @@ var _config = {
     h += h < 0 ? 1 : h > 1 ? -1 : 0;
     return (h * 6 < 1 ? m1 + (m2 - m1) * h * 6 : h < .5 ? m2 : h * 3 < 2 ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * _255 + .5 | 0;
   },
-  splitColor = function splitColor(v, toHSL, forceAlpha) {
+  splitColor = exports.splitColor = function splitColor(v, toHSL, forceAlpha) {
     var a = !v ? _colorLookup.black : _isNumber(v) ? [v >> 16, v >> 8 & _255, v & _255] : 0,
       r,
       g,
@@ -1232,7 +1229,7 @@ var _config = {
     }
     return result + shell[l];
   },
-  _colorExp = function () {
+  _colorExp = exports._colorExp = function () {
     var s = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3,4}){1,2}\\b",
       //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.,
       p;
@@ -1242,7 +1239,7 @@ var _config = {
     return new RegExp(s + ")", "gi");
   }(),
   _hslExp = /hsl[a]?\(/,
-  _colorStringFilter = function _colorStringFilter(a) {
+  _colorStringFilter = exports._colorStringFilter = function _colorStringFilter(a) {
     var combined = a.join(" "),
       toHSL;
     _colorExp.lastIndex = 0;
@@ -1260,7 +1257,7 @@ var _config = {
    * --------------------------------------------------------------------------------------
    */
   _tickerActive,
-  _ticker = function () {
+  _ticker = exports._ticker = function () {
     var _getTime = Date.now,
       _lagThreshold = 500,
       _adjustedLag = 33,
@@ -1282,7 +1279,7 @@ var _config = {
           dispatch,
           time,
           frame;
-        elapsed > _lagThreshold && (_startTime += elapsed - _adjustedLag);
+        (elapsed > _lagThreshold || elapsed < 0) && (_startTime += elapsed - _adjustedLag);
         _lastUpdate += elapsed;
         time = _lastUpdate - _startTime;
         overlap = time - _nextTime;
@@ -1319,9 +1316,9 @@ var _config = {
             _globals.gsap = gsap;
             (_win.gsapVersions || (_win.gsapVersions = [])).push(gsap.version);
             _install(_installScope || _win.GreenSockGlobals || !_win.gsap && _win || {});
-            _raf = _win.requestAnimationFrame;
             _registerPluginQueue.forEach(_createPlugin);
           }
+          _raf = typeof requestAnimationFrame !== "undefined" && requestAnimationFrame;
           _id && _self.sleep();
           _req = _raf || function (f) {
             return setTimeout(f, _nextTime - _self.time * 1000 + 1 | 0);
@@ -1331,7 +1328,7 @@ var _config = {
         }
       },
       sleep: function sleep() {
-        (_raf ? _win.cancelAnimationFrame : clearTimeout)(_id);
+        (_raf ? cancelAnimationFrame : clearTimeout)(_id);
         _tickerActive = 0;
         _req = _emptyFunc;
       },
@@ -1509,42 +1506,7 @@ var _config = {
 // 		c = ratio + o;
 // 	return p => p === 1 ? p : 3 * b * (1 - p) * (1 - p) * p + 3 * c * (1 - p) * p * p + p * p * p;
 // };
-exports._ticker = _ticker;
-exports._colorStringFilter = _colorStringFilter;
-exports._colorExp = _colorExp;
-exports.splitColor = splitColor;
-exports.interpolate = interpolate;
-exports.mapRange = mapRange;
-exports._replaceRandom = _replaceRandom;
-exports.wrapYoyo = wrapYoyo;
-exports.wrap = wrap;
-exports.normalize = normalize;
-exports.unitize = unitize;
-exports.pipe = pipe;
-exports.random = random;
-exports.snap = snap;
-exports._roundModifier = _roundModifier;
-exports.distribute = distribute;
-exports.shuffle = shuffle;
-exports.selector = selector;
-exports.toArray = toArray;
-exports.clamp = clamp;
-exports.getUnit = getUnit;
-exports._removeLinkedListItem = _removeLinkedListItem;
-exports._setDefaults = _setDefaults;
-exports._parseRelative = _parseRelative;
-exports._round = _round;
-exports._forEachName = _forEachName;
-exports._getProperty = _getProperty;
-exports._getCache = _getCache;
-exports._plugins = _plugins;
-exports._missingPlugin = _missingPlugin;
-exports._relExp = _relExp;
-exports._numWithUnitExp = _numWithUnitExp;
-exports._numExp = _numExp;
-exports._isUndefined = _isUndefined;
-exports._isString = _isString;
-exports._config = _config;
+
 _forEachName("Linear,Quad,Cubic,Quart,Quint,Strong", function (name, i) {
   var power = i < 5 ? i + 1 : i;
   _insertEase(name + ",Power" + (power - 1), i ? function (p) {
@@ -1604,7 +1566,7 @@ _forEachName("onComplete,onUpdate,onStart,onRepeat,onReverseComplete,onInterrupt
  * --------------------------------------------------------------------------------------
  */
 
-var GSCache = function GSCache(target, harness) {
+var GSCache = exports.GSCache = function GSCache(target, harness) {
   this.id = _gsID++;
   target._gsap = this;
   this.target = target;
@@ -1617,8 +1579,8 @@ var GSCache = function GSCache(target, harness) {
  * ANIMATION
  * --------------------------------------------------------------------------------------
  */
-exports.GSCache = GSCache;
-var Animation = /*#__PURE__*/function () {
+
+var Animation = exports.Animation = /*#__PURE__*/function () {
   function Animation(vars) {
     this.vars = vars;
     this._delay = +vars.delay || 0;
@@ -1686,18 +1648,16 @@ var Animation = /*#__PURE__*/function () {
       _lazySafeRender(this, _totalTime, suppressEvents); //   this._lock = 0;
       //}
     }
-
     return this;
   };
   _proto.time = function time(value, suppressEvents) {
     return arguments.length ? this.totalTime(Math.min(this.totalDuration(), value + _elapsedCycleDuration(this)) % (this._dur + this._rDelay) || (value ? this._dur : 0), suppressEvents) : this._time; // note: if the modulus results in 0, the playhead could be exactly at the end or the beginning, and we always defer to the END with a non-zero value, otherwise if you set the time() to the very end (duration()), it would render at the START!
   };
-
   _proto.totalProgress = function totalProgress(value, suppressEvents) {
-    return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.ratio;
+    return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.rawTime() > 0 ? 1 : 0;
   };
   _proto.progress = function progress(value, suppressEvents) {
-    return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.ratio;
+    return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.rawTime() > 0 ? 1 : 0;
   };
   _proto.iteration = function iteration(value, suppressEvents) {
     var cycleDuration = this.duration() + this._rDelay;
@@ -1713,12 +1673,10 @@ var Animation = /*#__PURE__*/function () {
   // 	return orientation < 0;
   // }
   ;
-
-  _proto.timeScale = function timeScale(value) {
+  _proto.timeScale = function timeScale(value, suppressEvents) {
     if (!arguments.length) {
       return this._rts === -_tinyNum ? 0 : this._rts; // recorded timeScale. Special case: if someone calls reverse() on an animation with timeScale of 0, we assign it -_tinyNum to remember it's reversed.
     }
-
     if (this._rts === value) {
       return this;
     }
@@ -1730,7 +1688,7 @@ var Animation = /*#__PURE__*/function () {
     this._rts = +value || 0;
     this._ts = this._ps || value === -_tinyNum ? 0 : this._rts; // _ts is the functional timeScale which would be 0 if the animation is paused.
 
-    this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), true);
+    this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), suppressEvents !== false);
     _setEnd(this); // if parent.smoothChildTiming was false, the end time didn't get updated in the _alignPlayhead() method, so do it here.
 
     return _recacheAncestors(this);
@@ -1752,7 +1710,6 @@ var Animation = /*#__PURE__*/function () {
         this.totalTime(this.parent && !this.parent.smoothChildTiming ? this.rawTime() : this._tTime || this._pTime, this.progress() === 1 && Math.abs(this._zTime) !== _tinyNum && (this._tTime -= _tinyNum)); // edge case: animation.progress(1).pause().play() wouldn't render again because the playhead is already at the end, but the call to totalTime() below will add it back to its parent...and not remove it again (since removing only happens upon rendering at a new time). Offsetting the _tTime slightly is done simply to cause the final render in totalTime() that'll pop it off its timeline (if autoRemoveChildren is true, of course). Check to make sure _zTime isn't -_tinyNum to avoid an edge case where the playhead is pushed to the end but INSIDE a tween/callback, the timeline itself is paused thus halting rendering and leaving a few unrendered. When resuming, it wouldn't render those otherwise.
       }
     }
-
     return this;
   };
   _proto.startTime = function startTime(value) {
@@ -1790,12 +1747,11 @@ var Animation = /*#__PURE__*/function () {
     var animation = this,
       time = arguments.length ? rawTime : animation.rawTime();
     while (animation) {
-      time = animation._start + time / (animation._ts || 1);
+      time = animation._start + time / (Math.abs(animation._ts) || 1);
       animation = animation._dp;
     }
-    return !this.parent && this._sat ? this._sat.vars.immediateRender ? -Infinity : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+    return !this.parent && this._sat ? this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
   };
-
   _proto.repeat = function repeat(value) {
     if (arguments.length) {
       this._repeat = value === Infinity ? -2 : value;
@@ -1897,7 +1853,6 @@ var Animation = /*#__PURE__*/function () {
   };
   return Animation;
 }();
-exports.Animation = Animation;
 _setDefaults(Animation.prototype, {
   _time: 0,
   _start: 0,
@@ -1924,7 +1879,7 @@ _setDefaults(Animation.prototype, {
  * -------------------------------------------------
  */
 
-var Timeline = /*#__PURE__*/function (_Animation) {
+var Timeline = exports.TimelineLite = exports.TimelineMax = exports.Timeline = /*#__PURE__*/function (_Animation) {
   _inheritsLoose(Timeline, _Animation);
   function Timeline(vars, position) {
     var _this;
@@ -1967,7 +1922,6 @@ var Timeline = /*#__PURE__*/function (_Animation) {
     return _addToTimeline(this, Tween.delayedCall(0, callback, params), position);
   } //ONLY for backward compatibility! Maybe delete?
   ;
-
   _proto2.staggerTo = function staggerTo(targets, duration, vars, stagger, position, onCompleteAll, onCompleteAllParams) {
     vars.duration = duration;
     vars.stagger = vars.stagger || stagger;
@@ -2044,7 +1998,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           time > dur && (time = dur);
         }
         prevIteration = _animationCycle(this._tTime, cycleDuration);
-        !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://greensock.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
+        !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://gsap.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
 
         if (yoyo && iteration & 1) {
           time = dur - time;
@@ -2108,7 +2062,6 @@ var Timeline = /*#__PURE__*/function (_Animation) {
         this._zTime = totalTime;
         prevTime = 0; // upon init, the playhead should always go forward; someone could invalidate() a completed timeline and then if they restart(), that would make child tweens render in reverse order which could lock in the wrong starting values if they build on each other, like tl.to(obj, {x: 100}).to(obj, {x: 0}).
       }
-
       if (!prevTime && time && !suppressEvents && !iteration) {
         _callback(this, "onStart");
         if (this._tTime !== tTime) {
@@ -2205,7 +2158,6 @@ var Timeline = /*#__PURE__*/function (_Animation) {
     }
     return this !== child ? _addToTimeline(this, child, position) : this; //don't allow a timeline to be added to itself as a child!
   };
-
   _proto2.getChildren = function getChildren(nested, tweens, timelines, ignoreBeforeTime) {
     if (nested === void 0) {
       nested = true;
@@ -2327,7 +2279,6 @@ var Timeline = /*#__PURE__*/function (_Animation) {
   // 	return result.filter((v, i) => result.indexOf(v) === i);
   // }
   ;
-
   _proto2.tweenTo = function tweenTo(position, vars) {
     vars = vars || {};
     var tl = this,
@@ -2493,7 +2444,6 @@ var Timeline = /*#__PURE__*/function (_Animation) {
   };
   return Timeline;
 }(Animation);
-exports.TimelineLite = exports.TimelineMax = exports.Timeline = Timeline;
 _setDefaults(Timeline.prototype, {
   _lock: 0,
   _hasPause: 0,
@@ -2556,7 +2506,6 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
     if (_relExp.test(end) || hasRandom) {
       pt.e = 0; //if the end string contains relative values or dynamic random(...) values, delete the end it so that on the final render we don't actually set it to the string with += or -= characters (forces it to use the calculated value).
     }
-
     this._pt = pt; //start the linked list with this new PropTween. Remember, we call _addComplexStringPropTween.call(tweenInstance...) to ensure that it's scoped properly. We may call it from within a plugin too, thus "this" would refer to the plugin.
 
     return pt;
@@ -2604,7 +2553,7 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
     }
     return copy;
   },
-  _checkPlugin = function _checkPlugin(property, vars, tween, index, target, targets) {
+  _checkPlugin = exports._checkPlugin = function _checkPlugin(property, vars, tween, index, target, targets) {
     var plugin, pt, ptLookup, i;
     if (_plugins[property] && (plugin = new _plugins[property]()).init(target, plugin.rawVars ? vars[property] : _processVars(vars[property], index, target, targets, tween), tween, index, targets) !== false) {
       tween._pt = pt = new PropTween(tween._pt, target, property, 0, 1, plugin.render, plugin, 0, plugin.priority);
@@ -2629,8 +2578,6 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
       immediateRender = vars.immediateRender,
       lazy = vars.lazy,
       onUpdate = vars.onUpdate,
-      onUpdateParams = vars.onUpdateParams,
-      callbackScope = vars.callbackScope,
       runBackwards = vars.runBackwards,
       yoyoEase = vars.yoyoEase,
       keyframes = vars.keyframes,
@@ -2689,9 +2636,9 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
           lazy: !prevStartAt && _isNotFalse(lazy),
           startAt: null,
           delay: 0,
-          onUpdate: onUpdate,
-          onUpdateParams: onUpdateParams,
-          callbackScope: callbackScope,
+          onUpdate: onUpdate && function () {
+            return _callback(tween, "onUpdate");
+          },
           stagger: 0
         }, startAt))); //copy the properties/values into a new object to avoid collisions, like var to = {x:0}, from = {x:500}; timeline.fromTo(e, from, to).fromTo(e, to, from);
 
@@ -2777,13 +2724,12 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
       hasPriority && _sortPropTweensByPriority(tween);
       tween._onInit && tween._onInit(tween); //plugins like RoundProps must wait until ALL of the PropTweens are instantiated. In the plugin's init() function, it sets the _onInit on the tween instance. May not be pretty/intuitive, but it's fast and keeps file size down.
     }
-
     tween._onUpdate = onUpdate;
     tween._initted = (!tween._op || tween._pt) && !overwritten; // if overwrittenProps resulted in the entire tween being killed, do NOT flag it as initted or else it may render for one tick.
 
     keyframes && time <= 0 && tl.render(_bigNum, true, true); // if there's a 0% keyframe, it'll render in the "before" state for any staggered/delayed animations thus when the following tween initializes, it'll use the "before" state instead of the "after" state as the initial values.
   },
-  _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time) {
+  _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time, skipRecursion) {
     var ptCache = (tween._pt && tween._ptCache || (tween._ptCache = {}))[property],
       pt,
       rootPT,
@@ -2811,7 +2757,7 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
           tween.vars[property] = "+=0";
           _initTween(tween, time);
           _forceAllPropTweens = 0;
-          return 1;
+          return skipRecursion ? _warn(property + " not eligible for reset") : 1; // if someone tries to do a quickTo() on a special property like borderRadius which must get split into 4 different properties, that's not eligible for .resetTo().
         }
         ptCache.push(pt);
       }
@@ -2881,7 +2827,6 @@ var _addComplexStringPropTween = function _addComplexStringPropTween(target, pro
   },
   _staggerTweenProps = _callbackNames + "repeat,repeatDelay,yoyo,repeatRefresh,yoyoEase,autoRevert",
   _staggerPropsToSkip = {};
-exports._checkPlugin = _checkPlugin;
 _forEachName(_staggerTweenProps + ",id,stagger,delay,duration,paused,scrollTrigger", function (name) {
   return _staggerPropsToSkip[name] = 1;
 });
@@ -2891,7 +2836,7 @@ _forEachName(_staggerTweenProps + ",id,stagger,delay,duration,paused,scrollTrigg
  * --------------------------------------------------------------------------------------
  */
 
-var Tween = /*#__PURE__*/function (_Animation2) {
+var Tween = exports.TweenLite = exports.TweenMax = exports.Tween = /*#__PURE__*/function (_Animation2) {
   _inheritsLoose(Tween, _Animation2);
   function Tween(targets, vars, position, skipInherit) {
     var _this3;
@@ -2921,7 +2866,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
       curTarget,
       staggerFunc,
       staggerVarsToMerge;
-    _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://greensock.com", !_config.nullTargetWarn) || [];
+    _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://gsap.com", !_config.nullTargetWarn) || [];
     _this3._ptLookup = []; //PropTween lookup. An array containing an object for each target, having keys for each tweening property
 
     _this3._overwrite = overwrite;
@@ -3007,12 +2952,10 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           }); // in case keyframes didn't go to 100%
         }
       }
-
       duration || _this3.duration(duration = tl.duration());
     } else {
       _this3.timeline = 0; //speed optimization, faster lookups (no going up the prototype chain)
     }
-
     if (overwrite === true && !_suppressOverwrites) {
       _overwritingTween = _assertThisInitialized(_this3);
       _globalTimeline.killTweensOf(parsedTargets);
@@ -3026,7 +2969,6 @@ var Tween = /*#__PURE__*/function (_Animation2) {
 
       _this3.render(Math.max(0, -delay) || 0); //in case delay is negative
     }
-
     scrollTrigger && _scrollTrigger(_assertThisInitialized(_this3), scrollTrigger);
     return _this3;
   }
@@ -3066,7 +3008,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           time = dur;
         } else {
           iteration = ~~(tTime / cycleDuration);
-          if (iteration && iteration === tTime / cycleDuration) {
+          if (iteration && iteration === _roundPrecise(tTime / cycleDuration)) {
             time = dur;
             iteration--;
           }
@@ -3078,7 +3020,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           time = dur - time;
         }
         prevIteration = _animationCycle(this._tTime, cycleDuration);
-        if (time === prevTime && !force && this._initted) {
+        if (time === prevTime && !force && this._initted && iteration === prevIteration) {
           //could be during the repeatDelay part. No need to render and fire callbacks.
           this._tTime = tTime;
           return this;
@@ -3086,7 +3028,8 @@ var Tween = /*#__PURE__*/function (_Animation2) {
         if (iteration !== prevIteration) {
           timeline && this._yEase && _propagateYoyoEase(timeline, isYoyo); //repeatRefresh functionality
 
-          if (this.vars.repeatRefresh && !isYoyo && !this._lock) {
+          if (this.vars.repeatRefresh && !isYoyo && !this._lock && this._time !== cycleDuration && this._initted) {
+            // this._time will === cycleDuration when we render at EXACTLY the end of an iteration. Without this condition, it'd often do the repeatRefresh render TWICE (again on the very next tick).
             this._lock = force = 1; //force, otherwise if lazy is true, the _attemptInitTween() will return and we'll jump out and get caught bouncing on each tick.
 
             this.render(_roundPrecise(cycleDuration * iteration), true).invalidate()._lock = 0;
@@ -3099,8 +3042,8 @@ var Tween = /*#__PURE__*/function (_Animation2) {
 
           return this;
         }
-        if (prevTime !== this._time) {
-          // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values.
+        if (prevTime !== this._time && !(force && this.vars.repeatRefresh && iteration !== prevIteration)) {
+          // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values. But we also don't want to dump if we're doing a repeatRefresh render!
           return this;
         }
         if (dur !== this._dur) {
@@ -3131,7 +3074,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
         pt.r(ratio, pt.d);
         pt = pt._next;
       }
-      timeline && timeline.render(totalTime < 0 ? totalTime : !time && isYoyo ? -_tinyNum : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
+      timeline && timeline.render(totalTime < 0 ? totalTime : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
       if (this._onUpdate && !suppressEvents) {
         isNegative && _rewindStartAt(this, totalTime, suppressEvents, force); //note: for performance reasons, we tuck this conditional logic inside less traveled areas (most tweens don't have an onUpdate). We'd just have it at the end before the onComplete, but the values should be updated before any onUpdate is called, so we ALSO put it here and then if it's not called, we do so later near the onComplete.
 
@@ -3162,7 +3105,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
     this.timeline && this.timeline.invalidate(soft);
     return _Animation2.prototype.invalidate.call(this, soft);
   };
-  _proto3.resetTo = function resetTo(property, value, start, startIsRelative) {
+  _proto3.resetTo = function resetTo(property, value, start, startIsRelative, skipRecursion) {
     _tickerActive || _ticker.wake();
     this._ts || this.play();
     var time = Math.min(this._dur, (this._dp._time - this._start) * this._ts),
@@ -3178,8 +3121,8 @@ var Tween = /*#__PURE__*/function (_Animation2) {
     // 	}
     // } else {
 
-    if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time)) {
-      return this.resetTo(property, value, start, startIsRelative); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
+    if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time, skipRecursion)) {
+      return this.resetTo(property, value, start, startIsRelative, 1); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
     } //}
 
     _alignPlayhead(this, 0);
@@ -3278,7 +3221,6 @@ var Tween = /*#__PURE__*/function (_Animation2) {
       callbackScope: scope
     }); // we must use onReverseComplete too for things like timeline.add(() => {...}) which should be triggered in BOTH directions (forward and reverse)
   };
-
   Tween.fromTo = function fromTo(targets, fromVars, toVars) {
     return _createTweenType(2, arguments);
   };
@@ -3292,7 +3234,6 @@ var Tween = /*#__PURE__*/function (_Animation2) {
   };
   return Tween;
 }(Animation);
-exports.TweenLite = exports.TweenMax = exports.Tween = Tween;
 _setDefaults(Tween.prototype, {
   _targets: [],
   _lazy: 0,
@@ -3334,7 +3275,7 @@ var _setterPlain = function _setterPlain(target, property, value) {
   _setterAttribute = function _setterAttribute(target, property, value) {
     return target.setAttribute(property, value);
   },
-  _getSetter = function _getSetter(target, property) {
+  _getSetter = exports._getSetter = function _getSetter(target, property) {
     return _isFunction(target[property]) ? _setterFunc : _isUndefined(target[property]) && target.setAttribute ? _setterAttribute : _setterPlain;
   },
   _renderPlain = function _renderPlain(ratio, data) {
@@ -3343,7 +3284,7 @@ var _setterPlain = function _setterPlain(target, property, value) {
   _renderBoolean = function _renderBoolean(ratio, data) {
     return data.set(data.t, data.p, !!(data.s + data.c * ratio), data);
   },
-  _renderComplexString = function _renderComplexString(ratio, data) {
+  _renderComplexString = exports._renderComplexString = function _renderComplexString(ratio, data) {
     var pt = data._pt,
       s = "";
     if (!ratio && data.b) {
@@ -3360,7 +3301,6 @@ var _setterPlain = function _setterPlain(target, property, value) {
       }
       s += data.c; //we use the "c" of the PropTween to store the final chunk of non-numeric text.
     }
-
     data.set(data.t, data.p, s, data);
   },
   _renderPropTweens = function _renderPropTweens(ratio, data) {
@@ -3397,7 +3337,7 @@ var _setterPlain = function _setterPlain(target, property, value) {
   _setterWithModifier = function _setterWithModifier(target, property, value, data) {
     data.mSet(target, property, data.m.call(data.tween, value, data.mt), data);
   },
-  _sortPropTweensByPriority = function _sortPropTweensByPriority(parent) {
+  _sortPropTweensByPriority = exports._sortPropTweensByPriority = function _sortPropTweensByPriority(parent) {
     var pt = parent._pt,
       next,
       pt2,
@@ -3424,10 +3364,8 @@ var _setterPlain = function _setterPlain(target, property, value) {
     }
     parent._pt = first;
   }; //PropTween key: t = target, p = prop, r = renderer, d = data, s = start, c = change, op = overwriteProperty (ONLY populated when it's different than p), pr = priority, _next/_prev for the linked list siblings, set = setter, m = modifier, mSet = modifierSetter (the original setter, before a modifier was added)
-exports._sortPropTweensByPriority = _sortPropTweensByPriority;
-exports._renderComplexString = _renderComplexString;
-exports._getSetter = _getSetter;
-var PropTween = /*#__PURE__*/function () {
+
+var PropTween = exports.PropTween = /*#__PURE__*/function () {
   function PropTween(next, target, prop, start, change, renderer, data, setter, priority) {
     this.t = target;
     this.s = start;
@@ -3454,7 +3392,7 @@ var PropTween = /*#__PURE__*/function () {
   };
   return PropTween;
 }(); //Initialization tasks
-exports.PropTween = PropTween;
+
 _forEachName(_callbackNames + "parent,duration,ease,delay,overwrite,runBackwards,startAt,yoyo,immediateRender,repeat,repeatDelay,data,paused,reversed,lazy,callbackScope,stringFilter,id,yoyoEase,stagger,inherit,repeatRefresh,keyframes,autoRevert,scrollTrigger", function (name) {
   return _reservedProps[name] = 1;
 });
@@ -3506,7 +3444,9 @@ var _media = [],
       });
       _dispatch("matchMediaRevert");
       matches.forEach(function (c) {
-        return c.onMatch(c);
+        return c.onMatch(c, function (func) {
+          return c.add(null, func);
+        });
       });
       _lastMediaTime = time;
       _dispatch("matchMedia");
@@ -3551,7 +3491,9 @@ var Context = /*#__PURE__*/function () {
         return result;
       };
     self.last = f;
-    return name === _isFunction ? f(self) : name ? self[name] = f : f;
+    return name === _isFunction ? f(self, function (func) {
+      return self.add(null, func);
+    }) : name ? self[name] = f : f;
   };
   _proto5.ignore = function ignore(func) {
     var prev = _context;
@@ -3572,35 +3514,50 @@ var Context = /*#__PURE__*/function () {
   _proto5.kill = function kill(revert, matchMedia) {
     var _this4 = this;
     if (revert) {
-      var tweens = this.getTweens();
-      this.data.forEach(function (t) {
-        // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
-        if (t.data === "isFlip") {
-          t.revert();
-          t.getChildren(true, true, false).forEach(function (tween) {
-            return tweens.splice(tweens.indexOf(tween), 1);
-          });
+      (function () {
+        var tweens = _this4.getTweens(),
+          i = _this4.data.length,
+          t;
+        while (i--) {
+          // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
+          t = _this4.data[i];
+          if (t.data === "isFlip") {
+            t.revert();
+            t.getChildren(true, true, false).forEach(function (tween) {
+              return tweens.splice(tweens.indexOf(tween), 1);
+            });
+          }
+        } // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
+
+        tweens.map(function (t) {
+          return {
+            g: t._dur || t._delay || t._sat && !t._sat.vars.immediateRender ? t.globalTime(0) : -Infinity,
+            t: t
+          };
+        }).sort(function (a, b) {
+          return b.g - a.g || -Infinity;
+        }).forEach(function (o) {
+          return o.t.revert(revert);
+        }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
+
+        i = _this4.data.length;
+        while (i--) {
+          // make sure we loop backwards so that, for example, SplitTexts that were created later on the same element get reverted first
+          t = _this4.data[i];
+          if (t instanceof Timeline) {
+            if (t.data !== "nested") {
+              t.scrollTrigger && t.scrollTrigger.revert();
+              t.kill(); // don't revert() the timeline because that's duplicating efforts since we already reverted all the tweens
+            }
+          } else {
+            !(t instanceof Tween) && t.revert && t.revert(revert);
+          }
         }
-      }); // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
-
-      tweens.map(function (t) {
-        return {
-          g: t.globalTime(0),
-          t: t
-        };
-      }).sort(function (a, b) {
-        return b.g - a.g || -Infinity;
-      }).forEach(function (o) {
-        return o.t.revert(revert);
-      }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
-
-      this.data.forEach(function (e) {
-        return !(e instanceof Tween) && e.revert && e.revert(revert);
-      });
-      this._r.forEach(function (f) {
-        return f(revert, _this4);
-      });
-      this.isReverted = true;
+        _this4._r.forEach(function (f) {
+          return f(revert, _this4);
+        });
+        _this4.isReverted = true;
+      })();
     } else {
       this.data.forEach(function (e) {
         return e.kill && e.kill();
@@ -3624,6 +3581,7 @@ var MatchMedia = /*#__PURE__*/function () {
   function MatchMedia(scope) {
     this.contexts = [];
     this.scope = scope;
+    _context && _context.data.push(this);
   }
   var _proto6 = MatchMedia.prototype;
   _proto6.add = function add(conditions, func, scope) {
@@ -3652,7 +3610,9 @@ var MatchMedia = /*#__PURE__*/function () {
         }
       }
     }
-    active && func(context);
+    active && func(context, function (f) {
+      return context.add(null, f);
+    });
     return this;
   } // refresh() {
   // 	let time = _lastMediaTime,
@@ -3664,7 +3624,6 @@ var MatchMedia = /*#__PURE__*/function () {
   // 	_media = media;
   // }
   ;
-
   _proto6.revert = function revert(config) {
     this.kill(config || {});
   };
@@ -3944,7 +3903,7 @@ var _getPluginPropTween = function _getPluginPropTween(plugin, prop) {
     };
   }; //register core plugins
 
-var gsap = _gsap.registerPlugin({
+var gsap = exports.default = exports.gsap = _gsap.registerPlugin({
   name: "attr",
   init: function init(target, vars, tween, index, targets) {
     var p, pt, v;
@@ -3975,48 +3934,30 @@ var gsap = _gsap.registerPlugin({
     }
   }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
-exports.default = exports.gsap = gsap;
-Tween.version = Timeline.version = gsap.version = "3.12.2";
+
+Tween.version = Timeline.version = gsap.version = "3.12.5";
 _coreReady = 1;
 _windowExists() && _wake();
-var Power0 = _easeMap.Power0,
-  Power1 = _easeMap.Power1,
-  Power2 = _easeMap.Power2,
-  Power3 = _easeMap.Power3,
-  Power4 = _easeMap.Power4,
-  Linear = _easeMap.Linear,
-  Quad = _easeMap.Quad,
-  Cubic = _easeMap.Cubic,
-  Quart = _easeMap.Quart,
-  Quint = _easeMap.Quint,
-  Strong = _easeMap.Strong,
-  Elastic = _easeMap.Elastic,
-  Back = _easeMap.Back,
-  SteppedEase = _easeMap.SteppedEase,
-  Bounce = _easeMap.Bounce,
-  Sine = _easeMap.Sine,
-  Expo = _easeMap.Expo,
-  Circ = _easeMap.Circ;
+var Power0 = exports.Power0 = _easeMap.Power0,
+  Power1 = exports.Power1 = _easeMap.Power1,
+  Power2 = exports.Power2 = _easeMap.Power2,
+  Power3 = exports.Power3 = _easeMap.Power3,
+  Power4 = exports.Power4 = _easeMap.Power4,
+  Linear = exports.Linear = _easeMap.Linear,
+  Quad = exports.Quad = _easeMap.Quad,
+  Cubic = exports.Cubic = _easeMap.Cubic,
+  Quart = exports.Quart = _easeMap.Quart,
+  Quint = exports.Quint = _easeMap.Quint,
+  Strong = exports.Strong = _easeMap.Strong,
+  Elastic = exports.Elastic = _easeMap.Elastic,
+  Back = exports.Back = _easeMap.Back,
+  SteppedEase = exports.SteppedEase = _easeMap.SteppedEase,
+  Bounce = exports.Bounce = _easeMap.Bounce,
+  Sine = exports.Sine = _easeMap.Sine,
+  Expo = exports.Expo = _easeMap.Expo,
+  Circ = exports.Circ = _easeMap.Circ;
 
 //export some internal methods/orojects for use in CSSPlugin so that we can externalize that file and allow custom builds that exclude it.
-exports.Circ = Circ;
-exports.Expo = Expo;
-exports.Sine = Sine;
-exports.Bounce = Bounce;
-exports.SteppedEase = SteppedEase;
-exports.Back = Back;
-exports.Elastic = Elastic;
-exports.Strong = Strong;
-exports.Quint = Quint;
-exports.Quart = Quart;
-exports.Cubic = Cubic;
-exports.Quad = Quad;
-exports.Linear = Linear;
-exports.Power4 = Power4;
-exports.Power3 = Power3;
-exports.Power2 = Power2;
-exports.Power1 = Power1;
-exports.Power0 = Power0;
 },{}],"../../node_modules/gsap/CSSPlugin.js":[function(require,module,exports) {
 "use strict";
 
@@ -4026,12 +3967,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = exports.checkPrefix = exports._getBBox = exports._createElement = exports.CSSPlugin = void 0;
 var _gsapCore = require("./gsap-core.js");
 /*!
- * CSSPlugin 3.12.2
- * https://greensock.com
+ * CSSPlugin 3.12.5
+ * https://gsap.com
  *
- * Copyright 2008-2023, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * Copyright 2008-2024, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -4108,14 +4049,17 @@ var _win,
   _saveStyle = function _saveStyle(property, isNotCSS) {
     var _this = this;
     var target = this.target,
-      style = target.style;
+      style = target.style,
+      cache = target._gsap;
     if (property in _transformProps && style) {
       this.tfm = this.tfm || {};
       if (property !== "transform") {
         property = _propertyAliases[property] || property;
         ~property.indexOf(",") ? property.split(",").forEach(function (a) {
           return _this.tfm[a] = _get(target, a);
-        }) : this.tfm[property] = target._gsap.x ? target._gsap[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
+        }) : this.tfm[property] = cache.x ? cache[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
+
+        property === _transformOriginProp && (this.tfm.zOrigin = cache.zOrigin);
       } else {
         return _propertyAliases.transform.split(",").forEach(function (p) {
           return _saveStyle.call(_this, p, isNotCSS);
@@ -4124,7 +4068,7 @@ var _win,
       if (this.props.indexOf(_transformProp) >= 0) {
         return;
       }
-      if (target._gsap.svg) {
+      if (cache.svg) {
         this.svgo = target.getAttribute("data-svg-origin");
         this.props.push(_transformOriginProp, isNotCSS, "");
       }
@@ -4161,6 +4105,12 @@ var _win,
       i = _reverting();
       if ((!i || !i.isStart) && !style[_transformProp]) {
         _removeIndependentTransforms(style);
+        if (cache.zOrigin && style[_transformOriginProp]) {
+          style[_transformOriginProp] += " " + cache.zOrigin + "px"; // since we're uncaching, we must put the zOrigin back into the transformOrigin so that we can pull it out accurately when we parse again. Otherwise, we'd lose the z portion of the origin since we extract it to protect from Safari bugs.
+
+          cache.zOrigin = 0;
+          cache.renderTransform();
+        }
         cache.uncache = 1; // if it's a startAt that's being reverted in the _initTween() of the core, we don't need to uncache transforms. This is purely a performance optimization.
       }
     }
@@ -4180,17 +4130,17 @@ var _win,
     return saver;
   },
   _supports3D,
-  _createElement = function _createElement(type, ns) {
+  _createElement = exports._createElement = function _createElement(type, ns) {
     var e = _doc.createElementNS ? _doc.createElementNS((ns || "http://www.w3.org/1999/xhtml").replace(/^https/, "http"), type) : _doc.createElement(type); //some servers swap in https for http in the namespace which can break things, making "style" inaccessible.
 
-    return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://greensock.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+    return e && e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://gsap.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
   },
   _getComputedProperty = function _getComputedProperty(target, property, skipPrefixFallback) {
     var cs = getComputedStyle(target);
     return cs[property] || cs.getPropertyValue(property.replace(_capsExp, "-$1").toLowerCase()) || cs.getPropertyValue(property) || !skipPrefixFallback && _getComputedProperty(target, _checkPropPrefix(property) || property, 1) || ""; //css variables may not need caps swapped out for dashes and lowercase.
   },
   _prefixes = "O,Moz,ms,Ms,Webkit".split(","),
-  _checkPropPrefix = function _checkPropPrefix(property, element, preferPrefix) {
+  _checkPropPrefix = exports.checkPrefix = function _checkPropPrefix(property, element, preferPrefix) {
     var e = element || _tempDiv,
       s = e.style,
       i = 5;
@@ -4258,7 +4208,7 @@ var _win,
       }
     }
   },
-  _getBBox = function _getBBox(target) {
+  _getBBox = exports._getBBox = function _getBBox(target) {
     var bounds;
     try {
       bounds = target.getBBox(); //Firefox throws errors if you try calling getBBox() on an SVG element that's not rendered (like in a <symbol> or <defs>). https://bugzilla.mozilla.org/show_bug.cgi?id=612118
@@ -4280,16 +4230,18 @@ var _win,
   //reports if the element is an SVG on which getBBox() actually works
   _removeProperty = function _removeProperty(target, property) {
     if (property) {
-      var style = target.style;
+      var style = target.style,
+        first2Chars;
       if (property in _transformProps && property !== _transformOriginProp) {
         property = _transformProp;
       }
       if (style.removeProperty) {
-        if (property.substr(0, 2) === "ms" || property.substr(0, 6) === "webkit") {
+        first2Chars = property.substr(0, 2);
+        if (first2Chars === "ms" || property.substr(0, 6) === "webkit") {
           //Microsoft and some Webkit browsers don't conform to the standard of capitalizing the first prefix character, so we adjust so that when we prefix the caps with a dash, it's correct (otherwise it'd be "ms-transform" instead of "-ms-transform" for IE9, for example)
           property = "-" + property;
         }
-        style.removeProperty(property.replace(_capsExp, "-$1").toLowerCase());
+        style.removeProperty(first2Chars === "--" ? property : property.replace(_capsExp, "-$1").toLowerCase());
       } else {
         //note: old versions of IE use "removeAttribute()" instead of "removeProperty()"
         style.removeAttribute(property);
@@ -4350,13 +4302,21 @@ var _win,
     if (cache && toPercent && cache.width && horizontal && cache.time === _gsapCore._ticker.time && !cache.uncache) {
       return (0, _gsapCore._round)(curValue / cache.width * amount);
     } else {
-      (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
-      parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
+      if (toPercent && (property === "height" || property === "width")) {
+        // if we're dealing with width/height that's inside a container with padding and/or it's a flexbox/grid container, we must apply it to the target itself rather than the _tempDiv in order to ensure complete accuracy, factoring in the parent's padding.
+        var v = target.style[property];
+        target.style[property] = amount + unit;
+        px = target[measureProperty];
+        v ? target.style[property] = v : _removeProperty(target, property);
+      } else {
+        (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
+        parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
 
-      parent.appendChild(_tempDiv);
-      px = _tempDiv[measureProperty];
-      parent.removeChild(_tempDiv);
-      style.position = "absolute";
+        parent.appendChild(_tempDiv);
+        px = _tempDiv[measureProperty];
+        parent.removeChild(_tempDiv);
+        style.position = "absolute";
+      }
       if (horizontal && toPercent) {
         cache = (0, _gsapCore._getCache)(parent);
         cache.time = _gsapCore._ticker.time;
@@ -4383,23 +4343,21 @@ var _win,
         value = _specialProps[property] && _specialProps[property](target, property, unit) || _getComputedProperty(target, property) || (0, _gsapCore._getProperty)(target, property) || (property === "opacity" ? 1 : 0); // note: some browsers, like Firefox, don't report borderRadius correctly! Instead, it only reports every corner like  borderTopLeftRadius
       }
     }
-
     return unit && !~(value + "").trim().indexOf(" ") ? _convertToUnit(target, property, value, unit) + unit : value;
   },
   _tweenComplexCSSString = function _tweenComplexCSSString(target, prop, start, end) {
     // note: we call _tweenComplexCSSString.call(pluginInstance...) to ensure that it's scoped properly. We may call it from within a plugin too, thus "this" would refer to the plugin.
     if (!start || start === "none") {
-      // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://greensock.com/forums/topic/18310-clippath-doesnt-work-on-ios/
+      // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://gsap.com/forums/topic/18310-clippath-doesnt-work-on-ios/
       var p = _checkPropPrefix(prop, target, 1),
         s = p && _getComputedProperty(target, p, 1);
       if (s && s !== start) {
         prop = p;
         start = s;
       } else if (prop === "borderColor") {
-        start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://greensock.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
+        start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://gsap.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
       }
     }
-
     var pt = new _gsapCore.PropTween(this._pt, target.style, prop, 0, 1, _gsapCore._renderComplexString),
       index = 0,
       matchIndex = 0,
@@ -4421,9 +4379,10 @@ var _win,
 
     end += "";
     if (end === "auto") {
+      startValue = target.style[prop];
       target.style[prop] = end;
       end = _getComputedProperty(target, prop) || end;
-      target.style[prop] = start;
+      startValue ? target.style[prop] = startValue : _removeProperty(target, prop);
     }
     a = [start, end];
     (0, _gsapCore._colorStringFilter)(a); // pass an array with the starting and ending values and let the filter do whatever it needs to the values. If colors are found, it returns true and then we must match where the color shows up order-wise because for things like boxShadow, sometimes the browser provides the computed values with the color FIRST, but the user provides it with the color LAST, so flip them if necessary. Same for drop-shadow().
@@ -4602,7 +4561,7 @@ var _win,
     		}
     	}
     	cache.classPT = plugin._pt = new PropTween(plugin._pt, target, "className", 0, 0, _renderClassName, data, 0, -11);
-    	if (style.cssText !== cssText) { //only apply if things change. Otherwise, in cases like a background-image that's pulled dynamically, it could cause a refresh. See https://greensock.com/forums/topic/20368-possible-gsap-bug-switching-classnames-in-chrome/.
+    	if (style.cssText !== cssText) { //only apply if things change. Otherwise, in cases like a background-image that's pulled dynamically, it could cause a refresh. See https://gsap.com/forums/topic/20368-possible-gsap-bug-switching-classnames-in-chrome/.
     		style.cssText = cssText; //we recorded cssText before we swapped classes and ran _getAllStyles() because in cases when a className tween is overwritten, we remove all the related tweening properties from that class change (otherwise class-specific stuff can't override properties we've directly set on the target's style object due to specificity).
     	}
     	_parseTransform(target, true); //to clear the caching of transforms
@@ -4653,7 +4612,6 @@ var _win,
         nextSibling = target.nextElementSibling;
         _docElement.appendChild(target); //we must add it to the DOM in order to get values properly
       }
-
       matrix = _getComputedTransformMatrixAsArray(target);
       temp ? style.display = temp : _removeProperty(target, "display");
       if (addedToDOM) {
@@ -4685,13 +4643,16 @@ var _win,
     if (!originIsAbsolute) {
       bounds = _getBBox(target);
       xOrigin = bounds.x + (~originSplit[0].indexOf("%") ? xOrigin / 100 * bounds.width : xOrigin);
-      yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin);
+      yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin); // if (!("xOrigin" in cache) && (xOrigin || yOrigin)) { // added in 3.12.3, reverted in 3.12.4; requires more exploration
+      // 	xOrigin -= bounds.x;
+      // 	yOrigin -= bounds.y;
+      // }
     } else if (matrix !== _identity2DMatrix && (determinant = a * d - b * c)) {
       //if it's zero (like if scaleX and scaleY are zero), skip it to avoid errors with dividing by zero.
       x = xOrigin * (d / determinant) + yOrigin * (-c / determinant) + (c * ty - d * tx) / determinant;
       y = xOrigin * (-b / determinant) + yOrigin * (a / determinant) - (a * ty - b * tx) / determinant;
       xOrigin = x;
-      yOrigin = y;
+      yOrigin = y; // theory: we only had to do this for smoothing and it assumes that the previous one was not originIsAbsolute.
     }
     if (smooth || smooth !== false && cache.smooth) {
       tx = xOrigin - xOriginOld;
@@ -4779,7 +4740,6 @@ var _win,
       } else {
         t1 = !uncache && target.getAttribute("data-svg-origin"); //  Remember, to work around browser inconsistencies we always force SVG elements' transformOrigin to 0,0 and offset the translation accordingly.
       }
-
       _applySVGOrigin(target, t1 || origin, !!t1 || cache.originIsAbsolute, cache.smooth !== false, matrix);
     }
     xOrigin = cache.xOrigin || 0;
@@ -4901,7 +4861,7 @@ var _win,
     cache.skewX = skewX + deg;
     cache.skewY = skewY + deg;
     cache.transformPerspective = perspective + px;
-    if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || 0) {
+    if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || !uncache && cache.zOrigin || 0) {
       style[_transformOriginProp] = _firstTwoOnly(origin);
     }
     cache.xOffset = cache.yOffset = 0;
@@ -5142,9 +5102,7 @@ var _win,
     }
     _assign(endCache, startCache);
   }; // handle splitting apart padding, margin, borderWidth, and borderRadius into their 4 components. Firefox, for example, won't report borderRadius correctly - it will only do borderTopLeftRadius and the other corners. We also want to handle paddingTop, marginLeft, borderRightWidth, etc.
-exports._getBBox = _getBBox;
-exports.checkPrefix = _checkPropPrefix;
-exports._createElement = _createElement;
+
 (0, _gsapCore._forEachName)("padding,margin,Width,Radius", function (name, index) {
   var t = "Top",
     r = "Right",
@@ -5171,7 +5129,7 @@ exports._createElement = _createElement;
     plugin.init(target, vars, tween);
   };
 });
-var CSSPlugin = {
+var CSSPlugin = exports.default = exports.CSSPlugin = {
   name: "css",
   register: _initCore,
   targetTest: function targetTest(target) {
@@ -5241,7 +5199,7 @@ var CSSPlugin = {
           // in case someone hard-codes a complex value as the start, like top: "calc(2vh / 2)". Without this, it'd use the computed value (always in px)
           startValue = typeof startAt[p] === "function" ? startAt[p].call(tween, index, target, targets) : startAt[p];
           (0, _gsapCore._isString)(startValue) && ~startValue.indexOf("random(") && (startValue = (0, _gsapCore._replaceRandom)(startValue));
-          (0, _gsapCore.getUnit)(startValue + "") || (startValue += _gsapCore._config.units[p] || (0, _gsapCore.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
+          (0, _gsapCore.getUnit)(startValue + "") || startValue === "auto" || (startValue += _gsapCore._config.units[p] || (0, _gsapCore.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
 
           (startValue + "").charAt(1) === "=" && (startValue = _get(target, p)); // can't work with relative values
         } else {
@@ -5279,7 +5237,6 @@ var CSSPlugin = {
 
             transformPropTween.dep = 1; //flag it as dependent so that if things get killed/overwritten and this is the only PropTween left, we can safely kill the whole tween.
           }
-
           if (p === "scale") {
             this._pt = new _gsapCore.PropTween(this._pt, cache, "scaleY", cache.scaleY, (relative ? (0, _gsapCore._parseRelative)(cache.scaleY, relative + endNum) : endNum) - cache.scaleY || 0, _renderCSSProp);
             this._pt.u = 0;
@@ -5371,7 +5328,6 @@ var CSSPlugin = {
     _getMatrix: _getMatrix
   }
 };
-exports.default = exports.CSSPlugin = CSSPlugin;
 _gsapCore.gsap.utils.checkPrefix = _checkPropPrefix;
 _gsapCore.gsap.core.getStyleSaver = _getStyleSaver;
 (function (positionAndScale, rotation, others, aliases) {
@@ -5533,11 +5489,9 @@ Object.defineProperty(exports, "TweenLite", {
 exports.gsap = exports.default = exports.TweenMax = void 0;
 var _gsapCore = require("./gsap-core.js");
 var _CSSPlugin = require("./CSSPlugin.js");
-var gsapWithCSS = _gsapCore.gsap.registerPlugin(_CSSPlugin.CSSPlugin) || _gsapCore.gsap,
+var gsapWithCSS = exports.default = exports.gsap = _gsapCore.gsap.registerPlugin(_CSSPlugin.CSSPlugin) || _gsapCore.gsap,
   // to protect from tree shaking
-  TweenMaxWithCSS = gsapWithCSS.core.Tween;
-exports.TweenMax = TweenMaxWithCSS;
-exports.default = exports.gsap = gsapWithCSS;
+  TweenMaxWithCSS = exports.TweenMax = gsapWithCSS.core.Tween;
 },{"./gsap-core.js":"../../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../../node_modules/gsap/CSSPlugin.js"}],"../../node_modules/@barba/core/dist/barba.umd.js":[function(require,module,exports) {
 var define;
 !function(t,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):(t=t||self).barba=n()}(this,(function(){function t(t,n){for(var r=0;r<n.length;r++){var e=n[r];e.enumerable=e.enumerable||!1,e.configurable=!0,"value"in e&&(e.writable=!0),Object.defineProperty(t,e.key,e)}}function n(n,r,e){return r&&t(n.prototype,r),e&&t(n,e),n}function r(){return(r=Object.assign||function(t){for(var n=1;n<arguments.length;n++){var r=arguments[n];for(var e in r)Object.prototype.hasOwnProperty.call(r,e)&&(t[e]=r[e])}return t}).apply(this,arguments)}function e(t,n){t.prototype=Object.create(n.prototype),t.prototype.constructor=t,t.__proto__=n}function i(t){return(i=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function o(t,n){return(o=Object.setPrototypeOf||function(t,n){return t.__proto__=n,t})(t,n)}function u(t,n,r){return(u=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return!1}}()?Reflect.construct:function(t,n,r){var e=[null];e.push.apply(e,n);var i=new(Function.bind.apply(t,e));return r&&o(i,r.prototype),i}).apply(null,arguments)}function f(t){var n="function"==typeof Map?new Map:void 0;return(f=function(t){if(null===t||-1===Function.toString.call(t).indexOf("[native code]"))return t;if("function"!=typeof t)throw new TypeError("Super expression must either be null or a function");if(void 0!==n){if(n.has(t))return n.get(t);n.set(t,r)}function r(){return u(t,arguments,i(this).constructor)}return r.prototype=Object.create(t.prototype,{constructor:{value:r,enumerable:!1,writable:!0,configurable:!0}}),o(r,t)})(t)}function s(t,n){try{var r=t()}catch(t){return n(t)}return r&&r.then?r.then(void 0,n):r}"undefined"!=typeof Symbol&&(Symbol.iterator||(Symbol.iterator=Symbol("Symbol.iterator"))),"undefined"!=typeof Symbol&&(Symbol.asyncIterator||(Symbol.asyncIterator=Symbol("Symbol.asyncIterator")));var c,a="2.9.7",h=function(){};!function(t){t[t.off=0]="off",t[t.error=1]="error",t[t.warning=2]="warning",t[t.info=3]="info",t[t.debug=4]="debug"}(c||(c={}));var v=c.off,l=function(){function t(t){this.t=t}t.getLevel=function(){return v},t.setLevel=function(t){return v=c[t]};var n=t.prototype;return n.error=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];this.i(console.error,c.error,n)},n.warn=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];this.i(console.warn,c.warning,n)},n.info=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];this.i(console.info,c.info,n)},n.debug=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];this.i(console.log,c.debug,n)},n.i=function(n,r,e){r<=t.getLevel()&&n.apply(console,["["+this.t+"] "].concat(e))},t}(),d=O,m=E,p=g,w=x,b=T,y="/",P=new RegExp(["(\\\\.)","(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?"].join("|"),"g");function g(t,n){for(var r,e=[],i=0,o=0,u="",f=n&&n.delimiter||y,s=n&&n.whitelist||void 0,c=!1;null!==(r=P.exec(t));){var a=r[0],h=r[1],v=r.index;if(u+=t.slice(o,v),o=v+a.length,h)u+=h[1],c=!0;else{var l="",d=r[2],m=r[3],p=r[4],w=r[5];if(!c&&u.length){var b=u.length-1,g=u[b];(!s||s.indexOf(g)>-1)&&(l=g,u=u.slice(0,b))}u&&(e.push(u),u="",c=!1);var E=m||p,x=l||f;e.push({name:d||i++,prefix:l,delimiter:x,optional:"?"===w||"*"===w,repeat:"+"===w||"*"===w,pattern:E?A(E):"[^"+k(x===f?x:x+f)+"]+?"})}}return(u||o<t.length)&&e.push(u+t.substr(o)),e}function E(t,n){return function(r,e){var i=t.exec(r);if(!i)return!1;for(var o=i[0],u=i.index,f={},s=e&&e.decode||decodeURIComponent,c=1;c<i.length;c++)if(void 0!==i[c]){var a=n[c-1];f[a.name]=a.repeat?i[c].split(a.delimiter).map((function(t){return s(t,a)})):s(i[c],a)}return{path:o,index:u,params:f}}}function x(t,n){for(var r=new Array(t.length),e=0;e<t.length;e++)"object"==typeof t[e]&&(r[e]=new RegExp("^(?:"+t[e].pattern+")$",R(n)));return function(n,e){for(var i="",o=e&&e.encode||encodeURIComponent,u=!e||!1!==e.validate,f=0;f<t.length;f++){var s=t[f];if("string"!=typeof s){var c,a=n?n[s.name]:void 0;if(Array.isArray(a)){if(!s.repeat)throw new TypeError('Expected "'+s.name+'" to not repeat, but got array');if(0===a.length){if(s.optional)continue;throw new TypeError('Expected "'+s.name+'" to not be empty')}for(var h=0;h<a.length;h++){if(c=o(a[h],s),u&&!r[f].test(c))throw new TypeError('Expected all "'+s.name+'" to match "'+s.pattern+'"');i+=(0===h?s.prefix:s.delimiter)+c}}else if("string"!=typeof a&&"number"!=typeof a&&"boolean"!=typeof a){if(!s.optional)throw new TypeError('Expected "'+s.name+'" to be '+(s.repeat?"an array":"a string"))}else{if(c=o(String(a),s),u&&!r[f].test(c))throw new TypeError('Expected "'+s.name+'" to match "'+s.pattern+'", but got "'+c+'"');i+=s.prefix+c}}else i+=s}return i}}function k(t){return t.replace(/([.+*?=^!:${}()[\]|/\\])/g,"\\$1")}function A(t){return t.replace(/([=!:$/()])/g,"\\$1")}function R(t){return t&&t.sensitive?"":"i"}function T(t,n,r){for(var e=(r=r||{}).strict,i=!1!==r.start,o=!1!==r.end,u=r.delimiter||y,f=[].concat(r.endsWith||[]).map(k).concat("$").join("|"),s=i?"^":"",c=0;c<t.length;c++){var a=t[c];if("string"==typeof a)s+=k(a);else{var h=a.repeat?"(?:"+a.pattern+")(?:"+k(a.delimiter)+"(?:"+a.pattern+"))*":a.pattern;n&&n.push(a),s+=a.optional?a.prefix?"(?:"+k(a.prefix)+"("+h+"))?":"("+h+")?":k(a.prefix)+"("+h+")"}}if(o)e||(s+="(?:"+k(u)+")?"),s+="$"===f?"$":"(?="+f+")";else{var v=t[t.length-1],l="string"==typeof v?v[v.length-1]===u:void 0===v;e||(s+="(?:"+k(u)+"(?="+f+"))?"),l||(s+="(?="+k(u)+"|"+f+")")}return new RegExp(s,R(r))}function O(t,n,r){return t instanceof RegExp?function(t,n){if(!n)return t;var r=t.source.match(/\((?!\?)/g);if(r)for(var e=0;e<r.length;e++)n.push({name:e,prefix:null,delimiter:null,optional:!1,repeat:!1,pattern:null});return t}(t,n):Array.isArray(t)?function(t,n,r){for(var e=[],i=0;i<t.length;i++)e.push(O(t[i],n,r).source);return new RegExp("(?:"+e.join("|")+")",R(r))}(t,n,r):function(t,n,r){return T(g(t,r),n,r)}(t,n,r)}d.match=function(t,n){var r=[];return E(O(t,r,n),r)},d.regexpToFunction=m,d.parse=p,d.compile=function(t,n){return x(g(t,n),n)},d.tokensToFunction=w,d.tokensToRegExp=b;var S={container:"container",history:"history",namespace:"namespace",prefix:"data-barba",prevent:"prevent",wrapper:"wrapper"},j=new(function(){function t(){this.o=S,this.u=new DOMParser}var n=t.prototype;return n.toString=function(t){return t.outerHTML},n.toDocument=function(t){return this.u.parseFromString(t,"text/html")},n.toElement=function(t){var n=document.createElement("div");return n.innerHTML=t,n},n.getHtml=function(t){return void 0===t&&(t=document),this.toString(t.documentElement)},n.getWrapper=function(t){return void 0===t&&(t=document),t.querySelector("["+this.o.prefix+'="'+this.o.wrapper+'"]')},n.getContainer=function(t){return void 0===t&&(t=document),t.querySelector("["+this.o.prefix+'="'+this.o.container+'"]')},n.removeContainer=function(t){document.body.contains(t)&&t.parentNode.removeChild(t)},n.addContainer=function(t,n){var r=this.getContainer();r?this.s(t,r):n.appendChild(t)},n.getNamespace=function(t){void 0===t&&(t=document);var n=t.querySelector("["+this.o.prefix+"-"+this.o.namespace+"]");return n?n.getAttribute(this.o.prefix+"-"+this.o.namespace):null},n.getHref=function(t){if(t.tagName&&"a"===t.tagName.toLowerCase()){if("string"==typeof t.href)return t.href;var n=t.getAttribute("href")||t.getAttribute("xlink:href");if(n)return this.resolveUrl(n.baseVal||n)}return null},n.resolveUrl=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];var e=n.length;if(0===e)throw new Error("resolveUrl requires at least one argument; got none.");var i=document.createElement("base");if(i.href=arguments[0],1===e)return i.href;var o=document.getElementsByTagName("head")[0];o.insertBefore(i,o.firstChild);for(var u,f=document.createElement("a"),s=1;s<e;s++)f.href=arguments[s],i.href=u=f.href;return o.removeChild(i),u},n.s=function(t,n){n.parentNode.insertBefore(t,n.nextSibling)},t}()),M=new(function(){function t(){this.h=[],this.v=-1}var e=t.prototype;return e.init=function(t,n){this.l="barba";var r={ns:n,scroll:{x:window.scrollX,y:window.scrollY},url:t};this.h.push(r),this.v=0;var e={from:this.l,index:0,states:[].concat(this.h)};window.history&&window.history.replaceState(e,"",t)},e.change=function(t,n,r){if(r&&r.state){var e=r.state,i=e.index;n=this.m(this.v-i),this.replace(e.states),this.v=i}else this.add(t,n);return n},e.add=function(t,n){var r=this.size,e=this.p(n),i={ns:"tmp",scroll:{x:window.scrollX,y:window.scrollY},url:t};this.h.push(i),this.v=r;var o={from:this.l,index:r,states:[].concat(this.h)};switch(e){case"push":window.history&&window.history.pushState(o,"",t);break;case"replace":window.history&&window.history.replaceState(o,"",t)}},e.update=function(t,n){var e=n||this.v,i=r({},this.get(e),{},t);this.set(e,i)},e.remove=function(t){t?this.h.splice(t,1):this.h.pop(),this.v--},e.clear=function(){this.h=[],this.v=-1},e.replace=function(t){this.h=t},e.get=function(t){return this.h[t]},e.set=function(t,n){return this.h[t]=n},e.p=function(t){var n="push",r=t,e=S.prefix+"-"+S.history;return r.hasAttribute&&r.hasAttribute(e)&&(n=r.getAttribute(e)),n},e.m=function(t){return Math.abs(t)>1?t>0?"forward":"back":0===t?"popstate":t>0?"back":"forward"},n(t,[{key:"current",get:function(){return this.h[this.v]}},{key:"state",get:function(){return this.h[this.h.length-1]}},{key:"previous",get:function(){return this.v<1?null:this.h[this.v-1]}},{key:"size",get:function(){return this.h.length}}]),t}()),L=function(t,n){try{var r=function(){if(!n.next.html)return Promise.resolve(t).then((function(t){var r=n.next;if(t){var e=j.toElement(t);r.namespace=j.getNamespace(e),r.container=j.getContainer(e),r.html=t,M.update({ns:r.namespace});var i=j.toDocument(t);document.title=i.title}}))}();return Promise.resolve(r&&r.then?r.then((function(){})):void 0)}catch(t){return Promise.reject(t)}},$=d,_={__proto__:null,update:L,nextTick:function(){return new Promise((function(t){window.requestAnimationFrame(t)}))},pathToRegexp:$},q=function(){return window.location.origin},B=function(t){return void 0===t&&(t=window.location.href),U(t).port},U=function(t){var n,r=t.match(/:\d+/);if(null===r)/^http/.test(t)&&(n=80),/^https/.test(t)&&(n=443);else{var e=r[0].substring(1);n=parseInt(e,10)}var i,o=t.replace(q(),""),u={},f=o.indexOf("#");f>=0&&(i=o.slice(f+1),o=o.slice(0,f));var s=o.indexOf("?");return s>=0&&(u=D(o.slice(s+1)),o=o.slice(0,s)),{hash:i,path:o,port:n,query:u}},D=function(t){return t.split("&").reduce((function(t,n){var r=n.split("=");return t[r[0]]=r[1],t}),{})},F=function(t){return void 0===t&&(t=window.location.href),t.replace(/(\/#.*|\/|#.*)$/,"")},H={__proto__:null,getHref:function(){return window.location.href},getOrigin:q,getPort:B,getPath:function(t){return void 0===t&&(t=window.location.href),U(t).path},parse:U,parseQuery:D,clean:F};function I(t,n,r){return void 0===n&&(n=2e3),new Promise((function(e,i){var o=new XMLHttpRequest;o.onreadystatechange=function(){if(o.readyState===XMLHttpRequest.DONE)if(200===o.status)e(o.responseText);else if(o.status){var n={status:o.status,statusText:o.statusText};r(t,n),i(n)}},o.ontimeout=function(){var e=new Error("Timeout error ["+n+"]");r(t,e),i(e)},o.onerror=function(){var n=new Error("Fetch error");r(t,n),i(n)},o.open("GET",t),o.timeout=n,o.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml"),o.setRequestHeader("x-barba","yes"),o.send()}))}var C=function(t){return!!t&&("object"==typeof t||"function"==typeof t)&&"function"==typeof t.then};function N(t,n){return void 0===n&&(n={}),function(){for(var r=arguments.length,e=new Array(r),i=0;i<r;i++)e[i]=arguments[i];var o=!1,u=new Promise((function(r,i){n.async=function(){return o=!0,function(t,n){t?i(t):r(n)}};var u=t.apply(n,e);o||(C(u)?u.then(r,i):r(u))}));return u}}var X=new(function(t){function n(){var n;return(n=t.call(this)||this).logger=new l("@barba/core"),n.all=["ready","page","reset","currentAdded","currentRemoved","nextAdded","nextRemoved","beforeOnce","once","afterOnce","before","beforeLeave","leave","afterLeave","beforeEnter","enter","afterEnter","after"],n.registered=new Map,n.init(),n}e(n,t);var r=n.prototype;return r.init=function(){var t=this;this.registered.clear(),this.all.forEach((function(n){t[n]||(t[n]=function(r,e){t.registered.has(n)||t.registered.set(n,new Set),t.registered.get(n).add({ctx:e||{},fn:r})})}))},r.do=function(t){for(var n=this,r=arguments.length,e=new Array(r>1?r-1:0),i=1;i<r;i++)e[i-1]=arguments[i];if(this.registered.has(t)){var o=Promise.resolve();return this.registered.get(t).forEach((function(t){o=o.then((function(){return N(t.fn,t.ctx).apply(void 0,e)}))})),o.catch((function(r){n.logger.debug("Hook error ["+t+"]"),n.logger.error(r)}))}return Promise.resolve()},r.clear=function(){var t=this;this.all.forEach((function(n){delete t[n]})),this.init()},r.help=function(){this.logger.info("Available hooks: "+this.all.join(","));var t=[];this.registered.forEach((function(n,r){return t.push(r)})),this.logger.info("Registered hooks: "+t.join(","))},n}(h)),z=function(){function t(t){if(this.P=[],"boolean"==typeof t)this.g=t;else{var n=Array.isArray(t)?t:[t];this.P=n.map((function(t){return $(t)}))}}return t.prototype.checkHref=function(t){if("boolean"==typeof this.g)return this.g;var n=U(t).path;return this.P.some((function(t){return null!==t.exec(n)}))},t}(),G=function(t){function n(n){var r;return(r=t.call(this,n)||this).k=new Map,r}e(n,t);var i=n.prototype;return i.set=function(t,n,r){return this.k.set(t,{action:r,request:n}),{action:r,request:n}},i.get=function(t){return this.k.get(t)},i.getRequest=function(t){return this.k.get(t).request},i.getAction=function(t){return this.k.get(t).action},i.has=function(t){return!this.checkHref(t)&&this.k.has(t)},i.delete=function(t){return this.k.delete(t)},i.update=function(t,n){var e=r({},this.k.get(t),{},n);return this.k.set(t,e),e},n}(z),Q=function(){return!window.history.pushState},W=function(t){return!t.el||!t.href},J=function(t){var n=t.event;return n.which>1||n.metaKey||n.ctrlKey||n.shiftKey||n.altKey},K=function(t){var n=t.el;return n.hasAttribute("target")&&"_blank"===n.target},V=function(t){var n=t.el;return void 0!==n.protocol&&window.location.protocol!==n.protocol||void 0!==n.hostname&&window.location.hostname!==n.hostname},Y=function(t){var n=t.el;return void 0!==n.port&&B()!==B(n.href)},Z=function(t){var n=t.el;return n.getAttribute&&"string"==typeof n.getAttribute("download")},tt=function(t){return t.el.hasAttribute(S.prefix+"-"+S.prevent)},nt=function(t){return Boolean(t.el.closest("["+S.prefix+"-"+S.prevent+'="all"]'))},rt=function(t){var n=t.href;return F(n)===F()&&B(n)===B()},et=function(t){function n(n){var r;return(r=t.call(this,n)||this).suite=[],r.tests=new Map,r.init(),r}e(n,t);var r=n.prototype;return r.init=function(){this.add("pushState",Q),this.add("exists",W),this.add("newTab",J),this.add("blank",K),this.add("corsDomain",V),this.add("corsPort",Y),this.add("download",Z),this.add("preventSelf",tt),this.add("preventAll",nt),this.add("sameUrl",rt,!1)},r.add=function(t,n,r){void 0===r&&(r=!0),this.tests.set(t,n),r&&this.suite.push(t)},r.run=function(t,n,r,e){return this.tests.get(t)({el:n,event:r,href:e})},r.checkLink=function(t,n,r){var e=this;return this.suite.some((function(i){return e.run(i,t,n,r)}))},n}(z),it=function(t){function n(r,e){var i;void 0===e&&(e="Barba error");for(var o=arguments.length,u=new Array(o>2?o-2:0),f=2;f<o;f++)u[f-2]=arguments[f];return(i=t.call.apply(t,[this].concat(u))||this).error=r,i.label=e,Error.captureStackTrace&&Error.captureStackTrace(function(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}(i),n),i.name="BarbaError",i}return e(n,t),n}(f(Error)),ot=function(){function t(t){void 0===t&&(t=[]),this.logger=new l("@barba/core"),this.all=[],this.page=[],this.once=[],this.A=[{name:"namespace",type:"strings"},{name:"custom",type:"function"}],t&&(this.all=this.all.concat(t)),this.update()}var n=t.prototype;return n.add=function(t,n){switch(t){case"rule":this.A.splice(n.position||0,0,n.value);break;case"transition":default:this.all.push(n)}this.update()},n.resolve=function(t,n){var r=this;void 0===n&&(n={});var e=n.once?this.once:this.page;e=e.filter(n.self?function(t){return t.name&&"self"===t.name}:function(t){return!t.name||"self"!==t.name});var i=new Map,o=e.find((function(e){var o=!0,u={};return!(!n.self||"self"!==e.name)||(r.A.reverse().forEach((function(n){o&&(o=r.R(e,n,t,u),e.from&&e.to&&(o=r.R(e,n,t,u,"from")&&r.R(e,n,t,u,"to")),e.from&&!e.to&&(o=r.R(e,n,t,u,"from")),!e.from&&e.to&&(o=r.R(e,n,t,u,"to")))})),i.set(e,u),o)})),u=i.get(o),f=[];if(f.push(n.once?"once":"page"),n.self&&f.push("self"),u){var s,c=[o];Object.keys(u).length>0&&c.push(u),(s=this.logger).info.apply(s,["Transition found ["+f.join(",")+"]"].concat(c))}else this.logger.info("No transition found ["+f.join(",")+"]");return o},n.update=function(){var t=this;this.all=this.all.map((function(n){return t.T(n)})).sort((function(t,n){return t.priority-n.priority})).reverse().map((function(t){return delete t.priority,t})),this.page=this.all.filter((function(t){return void 0!==t.leave||void 0!==t.enter})),this.once=this.all.filter((function(t){return void 0!==t.once}))},n.R=function(t,n,r,e,i){var o=!0,u=!1,f=t,s=n.name,c=s,a=s,h=s,v=i?f[i]:f,l="to"===i?r.next:r.current;if(i?v&&v[s]:v[s]){switch(n.type){case"strings":default:var d=Array.isArray(v[c])?v[c]:[v[c]];l[c]&&-1!==d.indexOf(l[c])&&(u=!0),-1===d.indexOf(l[c])&&(o=!1);break;case"object":var m=Array.isArray(v[a])?v[a]:[v[a]];l[a]?(l[a].name&&-1!==m.indexOf(l[a].name)&&(u=!0),-1===m.indexOf(l[a].name)&&(o=!1)):o=!1;break;case"function":v[h](r)?u=!0:o=!1}u&&(i?(e[i]=e[i]||{},e[i][s]=f[i][s]):e[s]=f[s])}return o},n.O=function(t,n,r){var e=0;return(t[n]||t.from&&t.from[n]||t.to&&t.to[n])&&(e+=Math.pow(10,r),t.from&&t.from[n]&&(e+=1),t.to&&t.to[n]&&(e+=2)),e},n.T=function(t){var n=this;t.priority=0;var r=0;return this.A.forEach((function(e,i){r+=n.O(t,e.name,i+1)})),t.priority=r,t},t}(),ut=function(){function t(t){void 0===t&&(t=[]),this.logger=new l("@barba/core"),this.S=!1,this.store=new ot(t)}var r=t.prototype;return r.get=function(t,n){return this.store.resolve(t,n)},r.doOnce=function(t){var n=t.data,r=t.transition;try{var e=function(){i.S=!1},i=this,o=r||{};i.S=!0;var u=s((function(){return Promise.resolve(i.j("beforeOnce",n,o)).then((function(){return Promise.resolve(i.once(n,o)).then((function(){return Promise.resolve(i.j("afterOnce",n,o)).then((function(){}))}))}))}),(function(t){i.S=!1,i.logger.debug("Transition error [before/after/once]"),i.logger.error(t)}));return Promise.resolve(u&&u.then?u.then(e):e())}catch(t){return Promise.reject(t)}},r.doPage=function(t){var n=t.data,r=t.transition,e=t.page,i=t.wrapper;try{var o=function(t){if(u)return t;f.S=!1},u=!1,f=this,c=r||{},a=!0===c.sync||!1;f.S=!0;var h=s((function(){function t(){return Promise.resolve(f.j("before",n,c)).then((function(){var t=!1;function r(r){return t?r:Promise.resolve(f.remove(n)).then((function(){return Promise.resolve(f.j("after",n,c)).then((function(){}))}))}var o=function(){if(a)return s((function(){return Promise.resolve(f.add(n,i)).then((function(){return Promise.resolve(f.j("beforeLeave",n,c)).then((function(){return Promise.resolve(f.j("beforeEnter",n,c)).then((function(){return Promise.resolve(Promise.all([f.leave(n,c),f.enter(n,c)])).then((function(){return Promise.resolve(f.j("afterLeave",n,c)).then((function(){return Promise.resolve(f.j("afterEnter",n,c)).then((function(){}))}))}))}))}))}))}),(function(t){if(f.M(t))throw new it(t,"Transition error [sync]")}));var r=function(r){return t?r:s((function(){var t=function(){if(!1!==o)return Promise.resolve(f.add(n,i)).then((function(){return Promise.resolve(f.j("beforeEnter",n,c)).then((function(){return Promise.resolve(f.enter(n,c,o)).then((function(){return Promise.resolve(f.j("afterEnter",n,c)).then((function(){}))}))}))}))}();if(t&&t.then)return t.then((function(){}))}),(function(t){if(f.M(t))throw new it(t,"Transition error [before/after/enter]")}))},o=!1,u=s((function(){return Promise.resolve(f.j("beforeLeave",n,c)).then((function(){return Promise.resolve(Promise.all([f.leave(n,c),L(e,n)]).then((function(t){return t[0]}))).then((function(t){return o=t,Promise.resolve(f.j("afterLeave",n,c)).then((function(){}))}))}))}),(function(t){if(f.M(t))throw new it(t,"Transition error [before/after/leave]")}));return u&&u.then?u.then(r):r(u)}();return o&&o.then?o.then(r):r(o)}))}var r=function(){if(a)return Promise.resolve(L(e,n)).then((function(){}))}();return r&&r.then?r.then(t):t()}),(function(t){if(f.S=!1,t.name&&"BarbaError"===t.name)throw f.logger.debug(t.label),f.logger.error(t.error),t;throw f.logger.debug("Transition error [page]"),f.logger.error(t),t}));return Promise.resolve(h&&h.then?h.then(o):o(h))}catch(t){return Promise.reject(t)}},r.once=function(t,n){try{return Promise.resolve(X.do("once",t,n)).then((function(){return n.once?N(n.once,n)(t):Promise.resolve()}))}catch(t){return Promise.reject(t)}},r.leave=function(t,n){try{return Promise.resolve(X.do("leave",t,n)).then((function(){return n.leave?N(n.leave,n)(t):Promise.resolve()}))}catch(t){return Promise.reject(t)}},r.enter=function(t,n,r){try{return Promise.resolve(X.do("enter",t,n)).then((function(){return n.enter?N(n.enter,n)(t,r):Promise.resolve()}))}catch(t){return Promise.reject(t)}},r.add=function(t,n){try{return j.addContainer(t.next.container,n),X.do("nextAdded",t),Promise.resolve()}catch(t){return Promise.reject(t)}},r.remove=function(t){try{return j.removeContainer(t.current.container),X.do("currentRemoved",t),Promise.resolve()}catch(t){return Promise.reject(t)}},r.M=function(t){return t.message?!/Timeout error|Fetch error/.test(t.message):!t.status},r.j=function(t,n,r){try{return Promise.resolve(X.do(t,n,r)).then((function(){return r[t]?N(r[t],r)(n):Promise.resolve()}))}catch(t){return Promise.reject(t)}},n(t,[{key:"isRunning",get:function(){return this.S},set:function(t){this.S=t}},{key:"hasOnce",get:function(){return this.store.once.length>0}},{key:"hasSelf",get:function(){return this.store.all.some((function(t){return"self"===t.name}))}},{key:"shouldWait",get:function(){return this.store.all.some((function(t){return t.to&&!t.to.route||t.sync}))}}]),t}(),ft=function(){function t(t){var n=this;this.names=["beforeLeave","afterLeave","beforeEnter","afterEnter"],this.byNamespace=new Map,0!==t.length&&(t.forEach((function(t){n.byNamespace.set(t.namespace,t)})),this.names.forEach((function(t){X[t](n.L(t))})))}return t.prototype.L=function(t){var n=this;return function(r){var e=t.match(/enter/i)?r.next:r.current,i=n.byNamespace.get(e.namespace);return i&&i[t]?N(i[t],i)(r):Promise.resolve()}},t}();Element.prototype.matches||(Element.prototype.matches=Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector),Element.prototype.closest||(Element.prototype.closest=function(t){var n=this;do{if(n.matches(t))return n;n=n.parentElement||n.parentNode}while(null!==n&&1===n.nodeType);return null});var st={container:null,html:"",namespace:"",url:{hash:"",href:"",path:"",port:null,query:{}}};return new(function(){function t(){this.version=a,this.schemaPage=st,this.Logger=l,this.logger=new l("@barba/core"),this.plugins=[],this.hooks=X,this.dom=j,this.helpers=_,this.history=M,this.request=I,this.url=H}var e=t.prototype;return e.use=function(t,n){var r=this.plugins;r.indexOf(t)>-1?this.logger.warn("Plugin ["+t.name+"] already installed."):"function"==typeof t.install?(t.install(this,n),r.push(t)):this.logger.warn("Plugin ["+t.name+'] has no "install" method.')},e.init=function(t){var n=void 0===t?{}:t,e=n.transitions,i=void 0===e?[]:e,o=n.views,u=void 0===o?[]:o,f=n.schema,s=void 0===f?S:f,c=n.requestError,a=n.timeout,h=void 0===a?2e3:a,v=n.cacheIgnore,d=void 0!==v&&v,m=n.prefetchIgnore,p=void 0!==m&&m,w=n.preventRunning,b=void 0!==w&&w,y=n.prevent,P=void 0===y?null:y,g=n.debug,E=n.logLevel;if(l.setLevel(!0===(void 0!==g&&g)?"debug":void 0===E?"off":E),this.logger.info(this.version),Object.keys(s).forEach((function(t){S[t]&&(S[t]=s[t])})),this.$=c,this.timeout=h,this.cacheIgnore=d,this.prefetchIgnore=p,this.preventRunning=b,this._=this.dom.getWrapper(),!this._)throw new Error("[@barba/core] No Barba wrapper found");this._.setAttribute("aria-live","polite"),this.q();var x=this.data.current;if(!x.container)throw new Error("[@barba/core] No Barba container found");if(this.cache=new G(d),this.prevent=new et(p),this.transitions=new ut(i),this.views=new ft(u),null!==P){if("function"!=typeof P)throw new Error("[@barba/core] Prevent should be a function");this.prevent.add("preventCustom",P)}this.history.init(x.url.href,x.namespace),this.B=this.B.bind(this),this.U=this.U.bind(this),this.D=this.D.bind(this),this.F(),this.plugins.forEach((function(t){return t.init()}));var k=this.data;k.trigger="barba",k.next=k.current,k.current=r({},this.schemaPage),this.hooks.do("ready",k),this.once(k),this.q()},e.destroy=function(){this.q(),this.H(),this.history.clear(),this.hooks.clear(),this.plugins=[]},e.force=function(t){window.location.assign(t)},e.go=function(t,n,r){var e;if(void 0===n&&(n="barba"),this.transitions.isRunning)this.force(t);else if(!(e="popstate"===n?this.history.current&&this.url.getPath(this.history.current.url)===this.url.getPath(t):this.prevent.run("sameUrl",null,null,t))||this.transitions.hasSelf)return n=this.history.change(t,n,r),r&&(r.stopPropagation(),r.preventDefault()),this.page(t,n,e)},e.once=function(t){try{var n=this;return Promise.resolve(n.hooks.do("beforeEnter",t)).then((function(){function r(){return Promise.resolve(n.hooks.do("afterEnter",t)).then((function(){}))}var e=function(){if(n.transitions.hasOnce){var r=n.transitions.get(t,{once:!0});return Promise.resolve(n.transitions.doOnce({transition:r,data:t})).then((function(){}))}}();return e&&e.then?e.then(r):r()}))}catch(t){return Promise.reject(t)}},e.page=function(t,n,e){try{var i=function(){var t=o.data;return Promise.resolve(o.hooks.do("page",t)).then((function(){var n=s((function(){var n=o.transitions.get(t,{once:!1,self:e});return Promise.resolve(o.transitions.doPage({data:t,page:u,transition:n,wrapper:o._})).then((function(){o.q()}))}),(function(){0===l.getLevel()&&o.force(t.current.url.href)}));if(n&&n.then)return n.then((function(){}))}))},o=this;o.data.next.url=r({href:t},o.url.parse(t)),o.data.trigger=n;var u=o.cache.has(t)?o.cache.update(t,{action:"click"}).request:o.cache.set(t,o.request(t,o.timeout,o.onRequestError.bind(o,n)),"click").request,f=function(){if(o.transitions.shouldWait)return Promise.resolve(L(u,o.data)).then((function(){}))}();return Promise.resolve(f&&f.then?f.then(i):i())}catch(t){return Promise.reject(t)}},e.onRequestError=function(t){this.transitions.isRunning=!1;for(var n=arguments.length,r=new Array(n>1?n-1:0),e=1;e<n;e++)r[e-1]=arguments[e];var i=r[0],o=r[1],u=this.cache.getAction(i);return this.cache.delete(i),!(this.$&&!1===this.$(t,u,i,o)||("click"===u&&this.force(i),1))},e.prefetch=function(t){var n=this;this.cache.has(t)||this.cache.set(t,this.request(t,this.timeout,this.onRequestError.bind(this,"barba")).catch((function(t){n.logger.error(t)})),"prefetch")},e.F=function(){!0!==this.prefetchIgnore&&(document.addEventListener("mouseover",this.B),document.addEventListener("touchstart",this.B)),document.addEventListener("click",this.U),window.addEventListener("popstate",this.D)},e.H=function(){!0!==this.prefetchIgnore&&(document.removeEventListener("mouseover",this.B),document.removeEventListener("touchstart",this.B)),document.removeEventListener("click",this.U),window.removeEventListener("popstate",this.D)},e.B=function(t){var n=this,r=this.I(t);if(r){var e=this.dom.getHref(r);this.prevent.checkHref(e)||this.cache.has(e)||this.cache.set(e,this.request(e,this.timeout,this.onRequestError.bind(this,r)).catch((function(t){n.logger.error(t)})),"enter")}},e.U=function(t){var n=this.I(t);if(n)return this.transitions.isRunning&&this.preventRunning?(t.preventDefault(),void t.stopPropagation()):void this.go(this.dom.getHref(n),n,t)},e.D=function(t){this.go(this.url.getHref(),"popstate",t)},e.I=function(t){for(var n=t.target;n&&!this.dom.getHref(n);)n=n.parentNode;if(n&&!this.prevent.checkLink(n,t,this.dom.getHref(n)))return n},e.q=function(){var t=this.url.getHref(),n={container:this.dom.getContainer(),html:this.dom.getHtml(),namespace:this.dom.getNamespace(),url:r({href:t},this.url.parse(t))};this.C={current:n,next:r({},this.schemaPage),trigger:void 0},this.hooks.do("reset",this.data)},n(t,[{key:"data",get:function(){return this.C}},{key:"wrapper",get:function(){return this._}}]),t}())}));
@@ -5594,6 +5548,12 @@ function contentAnimation() {
     delay: 0.2
   });
 }
+
+/**
+ * Initializes the Barba.js library for handling page transitions.
+ *
+ * @return {void} 
+ */
 function initBarba() {
   _core.default.init({
     sync: true,
@@ -5635,7 +5595,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.distMetric = exports.closestEdge = void 0;
 // Detect Closest Edge
 // from https://codepen.io/johnstew/pen/zxYJZP?editors=0010
-var closestEdge = function closestEdge(x, y, w, h) {
+var closestEdge = exports.closestEdge = function closestEdge(x, y, w, h) {
   var topEdgeDist = distMetric(x, y, w / 2, 0);
   var bottomEdgeDist = distMetric(x, y, w / 2, h);
   var min = Math.min(topEdgeDist, bottomEdgeDist);
@@ -5644,13 +5604,11 @@ var closestEdge = function closestEdge(x, y, w, h) {
 
 // Distance Formula
 // from https://codepen.io/johnstew/pen/zxYJZP?editors=0010
-exports.closestEdge = closestEdge;
-var distMetric = function distMetric(x, y, x2, y2) {
+var distMetric = exports.distMetric = function distMetric(x, y, x2, y2) {
   var xDiff = x - x2;
   var yDiff = y - y2;
   return xDiff * xDiff + yDiff * yDiff;
 };
-exports.distMetric = distMetric;
 },{}],"../javascript/navbar/menuItem.js":[function(require,module,exports) {
 "use strict";
 
@@ -5664,9 +5622,9 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var MenuItem = /*#__PURE__*/function () {
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var MenuItem = exports.MenuItem = /*#__PURE__*/function () {
   function MenuItem(el) {
     _classCallCheck(this, MenuItem);
     // .menu__item element
@@ -5743,7 +5701,6 @@ var MenuItem = /*#__PURE__*/function () {
   }]);
   return MenuItem;
 }();
-exports.MenuItem = MenuItem;
 },{"gsap":"../../node_modules/gsap/index.js","./utils":"../javascript/navbar/utils.js"}],"../javascript/navbar/menu.js":[function(require,module,exports) {
 "use strict";
 
@@ -5752,73 +5709,92 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Menu = void 0;
 var _menuItem = require("./menuItem");
+var _gsap = require("gsap");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-var Menu = /*#__PURE__*/_createClass(function Menu(el) {
-  var _this = this;
-  _classCallCheck(this, Menu);
-  // .menu element
-  this.DOM = {
-    el: el
-  };
-  // the menu items
-  this.DOM.menuItems = this.DOM.el.querySelectorAll(".menu__item");
-  // array of MenuItem
-  this.menuItems = [];
-  this.DOM.menuItems.forEach(function (menuItem) {
-    return _this.menuItems.push(new _menuItem.MenuItem(menuItem));
-  });
-});
-exports.Menu = Menu;
-},{"./menuItem":"../javascript/navbar/menuItem.js"}],"../javascript/navbar/navbar.js":[function(require,module,exports) {
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var Menu = exports.Menu = /*#__PURE__*/function () {
+  function Menu(menuDOM, menuBurgerButton) {
+    var _this = this;
+    _classCallCheck(this, Menu);
+    this.menuBurgerButton = menuBurgerButton;
+    // .menu element
+    this.DOM = {
+      el: menuDOM
+    };
+    // the menu items
+    this.DOM.menuItems = this.DOM.el.querySelectorAll(".menu__item");
+    // array of MenuItem
+    this.menuItems = [];
+    this.isOpen = false;
+    this.DOM.menuItems.forEach(function (menuItem) {
+      return _this.menuItems.push(new _menuItem.MenuItem(menuItem));
+    });
+  }
+
+  // a function that toggles the isOpen property
+  _createClass(Menu, [{
+    key: "toggle",
+    value: function toggle() {
+      this.isOpen = !this.isOpen;
+    }
+
+    // a function that open or close the isOpen property with a param
+  }, {
+    key: "setOpen",
+    value: function setOpen(isOpen) {
+      this.isOpen = isOpen;
+    }
+
+    /**
+     * Function to animate the opening of the menu.
+     *
+     */
+  }, {
+    key: "animateOpen",
+    value: function animateOpen() {
+      this.menuBurgerButton.classList.toggle("change");
+      if (!window.menu.isOpen) {
+        _gsap.gsap.to(this.DOM.el, {
+          duration: 1,
+          x: "0"
+        });
+        window.menu.toggle();
+      } else {
+        _gsap.gsap.to(this.DOM.el, {
+          duration: 1,
+          x: "100%"
+        });
+        window.menu.toggle();
+      }
+    }
+  }]);
+  return Menu;
+}();
+},{"./menuItem":"../javascript/navbar/menuItem.js","gsap":"../../node_modules/gsap/index.js"}],"../javascript/navbar/navbar.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = initMenuLogic;
-var _gsap = require("gsap");
 var _menu = require("./menu");
-// initialize the menu
-
+var _gsap = require("gsap");
 function initMenuLogic() {
-  var menu = document.querySelector(".menu");
-  new _menu.Menu(menu);
-  _gsap.gsap.set(menu, {
+  var menuDOM = document.querySelector(".menu");
+  var menuBurgerButton = document.querySelector("#menu-burger");
+  window.menu = new _menu.Menu(menuDOM, menuBurgerButton);
+  _gsap.gsap.set(menuDOM, {
     x: "100%"
   });
-  var isMenuOpen = false;
-  var menuBurgerButton = document.querySelector("#menu-burger");
   menuBurgerButton.addEventListener("click", function () {
-    menuBurgerButton.classList.toggle("change");
-    if (!isMenuOpen) {
-      _gsap.gsap.to(menu, {
-        duration: 1,
-        x: "0"
-      });
-      isMenuOpen = true;
-    } else {
-      _gsap.gsap.to(menu, {
-        duration: 1,
-        x: "100%"
-      });
-      isMenuOpen = false;
-    }
+    window.menu.animateOpen();
   });
-
-  // let closeButton = menu.querySelector("#closeButton");
-  // closeButton.addEventListener("click", () => {
-  //   gsap.to(menu, {
-  //     duration: 1,
-  //     x: "100%",
-  //   });
-  // });
 }
-},{"gsap":"../../node_modules/gsap/index.js","./menu":"../javascript/navbar/menu.js"}],"../javascript/MouseCursor.js":[function(require,module,exports) {
+},{"./menu":"../javascript/navbar/menu.js","gsap":"../../node_modules/gsap/index.js"}],"../javascript/MouseCursor.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5870,8 +5846,7 @@ function initCursorLogic() {
     targetY = e.pageY + yOffset;
   });
 }
-var _default = initCursorLogic;
-exports.default = _default;
+var _default = exports.default = initCursorLogic;
 },{}],"main.js":[function(require,module,exports) {
 "use strict";
 
@@ -5907,7 +5882,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60679" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60594" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

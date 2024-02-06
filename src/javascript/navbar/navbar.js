@@ -1,39 +1,17 @@
-import { gsap } from "gsap";
 import { Menu } from "./menu";
-// initialize the menu
+import { gsap } from "gsap";
 
 export default function initMenuLogic() {
-  let menu = document.querySelector(".menu");
-  new Menu(menu);
+  let menuDOM = document.querySelector(".menu");
+  let menuBurgerButton = document.querySelector("#menu-burger");
+  
+  window.menu = new Menu(menuDOM, menuBurgerButton);
 
-  gsap.set(menu, {
+  gsap.set(menuDOM, {
     x: "100%",
   });
 
-  let isMenuOpen = false;
-  let menuBurgerButton = document.querySelector("#menu-burger");
-  menuBurgerButton.addEventListener("click", () => {
-    menuBurgerButton.classList.toggle("change");
-    if (!isMenuOpen) {
-      gsap.to(menu, {
-        duration: 1,
-        x: "0",
-      });
-      isMenuOpen = true;
-    } else {
-      gsap.to(menu, {
-        duration: 1,
-        x: "100%",
-      });
-      isMenuOpen = false;
-    }
+  menuBurgerButton.addEventListener("click", ()=>{
+    window.menu.animateOpen();
   });
-
-  // let closeButton = menu.querySelector("#closeButton");
-  // closeButton.addEventListener("click", () => {
-  //   gsap.to(menu, {
-  //     duration: 1,
-  //     x: "100%",
-  //   });
-  // });
 }

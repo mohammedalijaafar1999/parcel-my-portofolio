@@ -40,6 +40,11 @@ function contentAnimation() {
   });
 }
 
+/**
+ * Initializes the Barba.js library for handling page transitions.
+ *
+ * @return {void} 
+ */
 export default function initBarba() {
   barba.init({
     sync: true,

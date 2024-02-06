@@ -15,7 +15,7 @@
 
     <nav class="menu">
       <div class="menu__item">
-        <a href="/" class="menu__item-link">Home</a>
+        <a href="/" class="menu__item-link" onclick="window.menu.setOpen(false)">Home</a>
         <div class="marquee">
           <div class="marquee__inner-wrap">
             <div class="marquee__inner" aria-hidden="true">
@@ -71,7 +71,7 @@
       <!--/menu__item-->
       <div class="menu__item">
         <a href="/Work.html" class="menu__item-link">Work</a>
-        <div class="marquee">
+        <div class="marquee" onclick="window.menu.setOpen(false)">
           <div class="marquee__inner-wrap">
             <div class="marquee__inner" aria-hidden="true">
               <span>Work</span>
@@ -127,13 +127,14 @@
       <!-- ... -->
     </nav>
 
+    <!-- menu icon top right -->
     <div id="menu-burger">
       <div class="bar1"></div>
       <div class="bar2"></div>
       <div class="bar3"></div>
     </div>
 
-    <div
+    <!-- <div
       style="
         top: 0;
         position: fixed;
@@ -148,11 +149,13 @@
       "
     >
       <h1>WORK IN PROGRESS</h1>
-    </div>
+    </div> -->
 
+    <!-- Cursor effect -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor_follower" id="cursor_follower"></div>
 
+    <!-- this is where the unique content will be injected for the individual pages -->
     <main data-barba="container" data-barba-namespace="home">
       <link rel="stylesheet" href="../css/index.css" />
       <h1
